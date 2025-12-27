@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebCrest - Digital Solutions & Web Development</title>
+  <meta name=\"description\" content=\"WebCrest delivers innovative web development, design, and digital solutions to elevate your online presence.\">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="icon" href="logo.png" type="image/png">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="loader" id="loader"><span></span></div>
+
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo-brand">
+        <img src="logo.png" alt="WebCrest Logo" class="logo" loading="lazy">
+        <span class="brand-text">Web<strong>Crest</strong></span>
+      </a>
+      <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <ul class="nav-list" id="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="#services-section" class="nav-link">Services</a></li>
+        <li><a href="#quote-section" class="nav-link">Get a Quote</a></li>
+        <li><a href="#contact-section" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+    <div class="theme-toggle-container">
+      <div class="theme-options" id="theme-options">
+        <button class="theme-btn" data-theme="dark" aria-label="Dark Theme"><i class="fas fa-moon"></i></button>
+        <button class="theme-btn" data-theme="light" aria-label="Light Theme"><i class="fas fa-sun"></i></button>
+        <button class="theme-btn" data-theme="modern" aria-label="Modern Theme"><i class="fas fa-square"></i></button>
+      </div>
+      <div class="color-picker-container" id="color-picker">
+        <button class="color-swatch" style="background-color: #38bdf8;" data-color="#38bdf8"></button>
+        <button class="color-swatch" style="background-color: #facc15;" data-color="#facc15"></button>
+        <button class="color-swatch" style="background-color: #ef4444;" data-color="#ef4444"></button>
+        <button class="color-swatch" style="background-color: #22c55e;" data-color="#22c55e"></button>
+        <button class="color-swatch" style="background-color: #8b5cf6;" data-color="#8b5cf6"></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" data-aos="fade-in">
+    <div class="container">
+      <div class=\"hero-content\">
+        <h1 data-aos=\"fade-up\" data-aos-delay=\"100\" data-aos-duration=\"1000\">
+          <span class=\"gradient-text\">Reach New Heights</span> with Digital Excellence
+        </h1>
+        <p data-aos=\"fade-up\" data-aos-delay=\"200\" data-aos-duration=\"1000\">
+          WebCrest transforms your vision into stunning, high-performance digital experiences. From responsive web design to robust applications, we craft solutions that elevate your brand.
+        </p>
+        <div class=\"hero-actions\" data-aos=\"fade-up\" data-aos-delay=\"300\" data-aos-duration=\"1000\">
+          <a href=\"#quote-section\" class=\"btn btn-primary\">
+            <i class=\"fas fa-rocket\"></i> Start Your Project
+          </a>
+          <a href=\"projects.html\" class=\"btn btn-secondary\">
+            <i class=\"fas fa-briefcase\"></i> View Our Portfolio
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id=\"about-brief\" class=\"about-brief-section\" data-aos=\"fade-up\" data-aos-duration=\"1000\">
+    <div class=\"container\">
+      <h2 class=\"section-title\" data-aos=\"slide-left\" data-aos-delay=\"100\" data-aos-duration=\"1000\">About WebCrest</h2>
+      <div class=\"about-content\" data-aos=\"zoom-in\" data-aos-delay=\"200\" data-aos-duration=\"1000\">
+        <p>
+          At WebCrest, we're passionate about elevating brands through exceptional digital design and development. We combine creative vision with cutting-edge technology to deliver web solutions that engage, inspire, and drive results. Our client-focused approach ensures every project is a reflection of your unique goals and values.
+        </p>
+        <a href=\"about.html\" class=\"btn btn-tertiary\">
+          <i class=\"fas fa-arrow-right\"></i> Discover Our Story
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Our Core Services</h2>
+      <div class="services-grid">
+        <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+          <i class="fas fa-laptop-code service-icon"></i>
+          <h3>Web Development</h3>
+          <p>From captivating landing pages to complex web applications, we build fast, secure, and scalable websites.</p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+          <i class="fas fa-shopping-cart service-icon"></i>
+          <h3>E-commerce Solutions</h3>
+          <p>Create powerful online stores that convert visitors into loyal customers with seamless shopping experiences.</p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+          <i class="fas fa-mobile-alt service-icon"></i>
+          <h3>Responsive Design</h3>
+          <p>Ensure your website looks and performs flawlessly on any device, from desktops to smartphones.</p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+          <i class="fas fa-palette service-icon"></i>
+          <h3>UI/UX Design</h3>
+          <p>Craft intuitive and engaging user interfaces that provide exceptional user experiences.</p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+          <i class="fas fa-search service-icon"></i>
+          <h3>SEO Optimization</h3>
+          <p>Improve your online visibility and rank higher on search engines to attract more organic traffic.</p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+          <i class="fas fa-cogs service-icon"></i>
+          <h3>Website Maintenance</h3>
+          <p>Keep your site secure, updated, and performing optimally with our comprehensive maintenance plans.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-choose-us" class="dark-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">Why Choose BST Developments?</h2>
+      <div class="features-grid">
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+          <i class="fas fa-lightbulb feature-icon"></i>
+          <h4>Innovative Solutions</h4>
+          <p>We leverage the latest technologies and creative thinking to deliver unique and effective web solutions.</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+          <i class="fas fa-handshake feature-icon"></i>
+          <h4>Client-Centric Approach</h4>
+          <p>Your vision is our priority. We work closely with you from concept to launch to ensure satisfaction.</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+          <i class="fas fa-shield-alt feature-icon"></i>
+          <h4>Reliability & Support</h4>
+          <p>Count on us for robust, secure websites and ongoing support to keep your digital presence strong.</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+          <i class="fas fa-rocket feature-icon"></i>
+          <h4>Fast Turnaround</h4>
+          <p>We understand deadlines. Our efficient workflow ensures timely delivery without compromising quality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">Our Technology Stack</h2>
+      <div class="tools-grid">
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="100">
+          <i class="fab fa-html5 tool-icon"></i>
+          <span>HTML5</span>
+        </div>
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="200">
+          <i class="fab fa-css3-alt tool-icon"></i>
+          <span>CSS3</span>
+        </div>
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="300">
+          <i class="fab fa-js-square tool-icon"></i>
+          <span>JavaScript</span>
+        </div>
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="400">
+          <i class="fab fa-react tool-icon"></i>
+          <span>React</span>
+        </div>
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="500">
+          <i class="fab fa-node-js tool-icon"></i>
+          <span>Node.js</span>
+        </div>
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="600">
+          <i class="fab fa-python tool-icon"></i>
+          <span>Python</span>
+        </div>
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="700">
+          <i class="fas fa-database tool-icon"></i>
+          <span>Databases</span>
+        </div>
+        <div class="tool-card" data-aos="zoom-in" data-aos-delay="800">
+          <i class="fab fa-git-alt tool-icon"></i>
+          <span>Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials-section" class="dark-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">What Our Clients Say</h2>
+      <div class="testimonials-slider">
+        <div class="testimonial-card">
+          <p class="quote">"BST Developments transformed our outdated website into a modern, engaging platform. Their attention to detail and responsiveness were exceptional!"</p>
+          <p class="author">- Jane Doe, CEO of Tech Innovations</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="quote">"Professional, timely, and delivered exactly what we needed. Our new e-commerce store is performing better than ever."</p>
+          <p class="author">- John Smith, Founder of Style Boutique</p>
+        </div>
+        <div class="testimonial-card">
+          <p class="quote">"The team at BST Developments truly understands design and functionality. Highly recommend their services for any web project."</p>
+          <p class="author">- Emily White, Marketing Director</p>
+        </div>
+      </div>
+      </div>
+  </section>
+
+  <section id="quote-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title">🧾 Get a Custom Quote</h2>
+      <p class="section-description">Select your desired service, style, and features to get an instant estimate for your project.</p>
+      <div class="form-container">
+        <form id="quote-form">
+          <div class="form-group">
+            <label for="service">Select Service:</label>
+            <select class="input-field" id="service" required>
+              <option value="" disabled selected>Choose a Service</option>
+              <option value="business" data-price="150000">Business Website (₦150,000)</option>
+              <option value="ecommerce" data-price="250000">E-commerce Store (₦250,000)</option>
+              <option value="portfolio" data-price="120000">Portfolio Site (₦120,000)</option>
+              <option value="custom" data-price="0">Custom Project (Contact for Price)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="style">Select Style:</label>
+            <select class="input-field" id="style" required>
+              <option value="" disabled selected>Choose a Style</option>
+              <option value="modern" data-price="30000">Modern (₦30,000)</option>
+              <option value="classic" data-price="20000">Classic (₦20,000)</option>
+              <option value="fun" data-price="25000">Fun (₦25,000)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Choose Features:</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" value="payment" data-price="30000"> Payment Integration (₦30,000)</label>
+              <label><input type="checkbox" value="chat" data-price="15000"> Live Chat (₦15,000)</label>
+              <label><input type="checkbox" value="booking" data-price="20000"> Booking System (₦20,000)</label>
+              <label><input type="checkbox" value="blog" data-price="10000"> Blog Setup (₦10,000)</label>
+              <label><input type="checkbox" value="seo" data-price="25000"> Basic SEO (₦25,000)</label>
+              <label><input type="checkbox" value="analytics" data-price="10000"> Analytics Integration (₦10,000)</label>
+            </div>
+          </div>
+          
+          <div class="quote-actions">
+            <button type="button" class="btn btn-primary" onclick="calculateQuote()">Calculate Price</button>
+            <p id="total-price" class="total-price"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact-section" class="dark-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="section-title text-center">Get In Touch</h2>
+      <p class="section-description text-center">Have a project in mind or just want to say hello? Reach out to us!</p>
+      <div class="contact-grid form-container">
+        <div class="contact-info">
+          <h3>Contact Details</h3>
+          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:Okafordavis8@gmail.com">Okafordavis8@gmail.com</a></p>
+          <p><i class="fas fa-phone-alt"></i> Phone / Telegram: +234 916 109 1132</p>
+          <p><i class="fas fa-map-marker-alt"></i> Location: Abuja, Nigeria</p>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="contact-form-container">
+          <h3>Send Us a Message</h3>
+          <form id="contact-form">
+            <input type="text" placeholder="Your Name" class="input-field" required>
+            <input type="email" placeholder="Your Email" class="input-field" required>
+            <textarea placeholder="Your Message" rows="5" class="input-field" required></textarea>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 WebCrest. All rights reserved. Built with <i class=\"fas fa-heart\"></i> to deliver digital excellence.</p>
+      <div class=\"footer-links\">
+        <a href=\"index.html\">Home</a> | 
+        <a href=\"about.html\">About</a> | 
+        <a href=\"projects.html\">Portfolio</a> | 
+        <a href=\"#services-section\">Services</a> | 
+        <a href=\"#contact-section\">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    });
+
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => {
+          loader.style.display = "none";
+        }, 500);
+      }
+    });
+
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    if (mobileMenu && navLinks) {
+      mobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active');
+        navLinks.classList.toggle('active');
+      });
+
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('is-active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    let totalPrice = 0;
+    function calculateQuote() {
+      totalPrice = 0;
+      const serviceSelect = document.getElementById("service");
+      const styleSelect = document.getElementById("style");
+      
+      const selectedServiceOption = serviceSelect.options[serviceSelect.selectedIndex];
+      const selectedStyleOption = styleSelect.options[styleSelect.selectedIndex];
+
+      if (serviceSelect.value === "" || styleSelect.value === "") {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Selection Required',
+          text: 'Please select both a Service and a Style to calculate the price.'
+        });
+        document.getElementById("total-price").innerText = "";
+        return;
+      }
+
+      totalPrice += parseInt(selectedServiceOption.dataset.price);
+      totalPrice += parseInt(selectedStyleOption.dataset.price);
+
+      document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+        totalPrice += parseInt(cb.dataset.price);
+      });
+      document.getElementById("total-price").innerText = `Estimated Total: ₦${totalPrice.toLocaleString()}`;
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: 'Thank you for your message. We will get back to you soon!',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        this.reset();
+    });
+
+    // Theme Toggle and Color Picker Logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const body = document.body;
+      const themeOptions = document.getElementById('theme-options');
+      const colorPicker = document.getElementById('color-picker');
+      const navbar = document.querySelector('.navbar');
+      const formContainers = document.querySelectorAll('.form-container');
+
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      const savedColor = localStorage.getItem('modernColor') || '#38bdf8';
+
+      setTheme(savedTheme, savedColor);
+
+      themeOptions.addEventListener('click', (e) => {
+        const theme = e.target.closest('button')?.dataset.theme;
+        if (theme) {
+          localStorage.setItem('theme', theme);
+          setTheme(theme, savedColor); // Pass savedColor to maintain accent color
+        }
+      });
+
+      colorPicker.addEventListener('click', (e) => {
+        const color = e.target.closest('button')?.dataset.color;
+        if (color) {
+          localStorage.setItem('modernColor', color);
+          setTheme('modern', color);
+        }
+      });
+      
+      function setTheme(theme, color) {
+        // Apply theme class to the body
+        body.className = '';
+        body.classList.add(theme + '-theme');
+
+        // Apply modern-style class and color if needed
+        if (theme === 'modern') {
+          colorPicker.style.display = 'flex';
+          navbar.classList.add('modern-style');
+          formContainers.forEach(container => container.classList.add('modern-style'));
+          document.documentElement.style.setProperty('--modern-color', color);
+        } else {
+          colorPicker.style.display = 'none';
+          navbar.classList.remove('modern-style');
+          formContainers.forEach(container => container.classList.remove('modern-style'));
+        }
+
+        // Update active state of theme buttons
+        document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.theme-btn[data-theme="${theme}"]`)?.classList.add('active');
+
+        // Update active state of color swatches
+        document.querySelectorAll('.color-swatch').forEach(swatch => swatch.classList.remove('active'));
+        if (theme === 'modern') {
+            document.querySelector(`.color-swatch[data-color="${color}"]`)?.classList.add('active');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
