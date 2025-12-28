@@ -15,6 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Theme Menu Toggle
+  const themeMenuToggle = document.getElementById('theme-menu-toggle');
+  const themeMenuContent = document.getElementById('theme-menu-content');
+  if (themeMenuToggle && themeMenuContent) {
+    themeMenuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      themeMenuToggle.classList.toggle('active');
+      themeMenuContent.classList.toggle('active');
+    });
+
+    // Close theme menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!themeMenuToggle.contains(e.target) && !themeMenuContent.contains(e.target)) {
+        themeMenuToggle.classList.remove('active');
+        themeMenuContent.classList.remove('active');
+      }
+    });
+  }
+
   // AOS Initialization
   AOS.init({
     duration: 1000,
