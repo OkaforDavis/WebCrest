@@ -82,10 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const service = form.querySelector('#service').value;
       const message = form.querySelector('#message').value;
 
-      // Assuming a simple, mock transaction for demonstration
-      // Replace with your actual Flutterwave implementation
+      // Flutterwave Integration with Test Keys
       FlutterwaveCheckout({
-        public_key: "FLWPUBK-XXXXXXXXXXXXXXXXXXXXXXXX-X", // Replace with your actual public key
+        public_key: "FLWPUBK_TEST-446d40f2470f5e98aaf9d54508372101-X", // Test public key
         tx_ref: `BSTDEV-${Date.now()}`,
         amount: 5000, // Example amount
         currency: "NGN",
