@@ -18,18 +18,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme Menu Toggle
   const themeMenuToggle = document.getElementById('theme-menu-toggle');
   const themeMenuContent = document.getElementById('theme-menu-content');
-  if (themeMenuToggle && themeMenuContent) {
+  const themePopupOverlay = document.getElementById('theme-popup-overlay');
+  
+  if (themeMenuToggle && themeMenuContent && themePopupOverlay) {
     themeMenuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       themeMenuToggle.classList.toggle('active');
       themeMenuContent.classList.toggle('active');
+      themePopupOverlay.classList.toggle('active');
     });
 
-    // Close theme menu when clicking outside
+    // Close theme menu when clicking overlay
+    themePopupOverlay.addEventListener('click', () => {
+      themeMenuToggle.classList.remove('active');
+      themeMenuContent.classList.remove('active');
+      themePopupOverlay.classList.remove('active');
+    });
+
+    // Close theme menu when clicking outside (on document)
     document.addEventListener('click', (e) => {
-      if (!themeMenuToggle.contains(e.target) && !themeMenuContent.contains(e.target)) {
+      const themeContainer = document.getElementById('theme-toggle-container');
+      if (themeContainer && !themeContainer.contains(e.target)) {
         themeMenuToggle.classList.remove('active');
         themeMenuContent.classList.remove('active');
+        themePopupOverlay.classList.remove('active');
       }
     });
   }
