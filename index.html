@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WebCrest - Digital Solutions & Web Development</title>
-  <meta name=\"description\" content=\"WebCrest delivers innovative web development, design, and digital solutions to elevate your online presence.\">
+  <meta name="description" content="WebCrest delivers innovative web development, design, and digital solutions to elevate your online presence.">
   <link rel="stylesheet" href="style.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="icon" href="logo.png" type="image/png">
@@ -228,7 +228,6 @@
           <p class="author">- Emily White, Marketing Director</p>
         </div>
       </div>
-      </div>
   </section>
 
   <section id="quote-section" data-aos="fade-up">
@@ -313,150 +312,18 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2025 WebCrest. All rights reserved. Built with <i class=\"fas fa-heart\"></i> to deliver digital excellence.</p>
-      <div class=\"footer-links\">
-        <a href=\"index.html\">Home</a> | 
-        <a href=\"about.html\">About</a> | 
-        <a href=\"projects.html\">Portfolio</a> | 
-        <a href=\"#services-section\">Services</a> | 
-        <a href=\"#contact-section\">Contact</a>
+      <p>&copy; 2025 WebCrest. All rights reserved. Built with <i class="fas fa-heart"></i> to deliver digital excellence.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a> | 
+        <a href="about.html">About</a> | 
+        <a href="projects.html">Portfolio</a> | 
+        <a href="#services-section">Services</a> | 
+        <a href="#contact-section">Contact</a>
       </div>
     </div>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="script.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-in-out',
-    });
-
-    window.addEventListener("load", () => {
-      const loader = document.getElementById("loader");
-      if (loader) {
-        loader.style.opacity = "0";
-        setTimeout(() => {
-          loader.style.display = "none";
-        }, 500);
-      }
-    });
-
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.getElementById('nav-links');
-
-    if (mobileMenu && navLinks) {
-      mobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.toggle('is-active');
-        navLinks.classList.toggle('active');
-      });
-
-      navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('is-active');
-          navLinks.classList.remove('active');
-        });
-      });
-    }
-
-    let totalPrice = 0;
-    function calculateQuote() {
-      totalPrice = 0;
-      const serviceSelect = document.getElementById("service");
-      const styleSelect = document.getElementById("style");
-      
-      const selectedServiceOption = serviceSelect.options[serviceSelect.selectedIndex];
-      const selectedStyleOption = styleSelect.options[styleSelect.selectedIndex];
-
-      if (serviceSelect.value === "" || styleSelect.value === "") {
-        Swal.fire({
-          icon: 'warning',
-          title: 'Selection Required',
-          text: 'Please select both a Service and a Style to calculate the price.'
-        });
-        document.getElementById("total-price").innerText = "";
-        return;
-      }
-
-      totalPrice += parseInt(selectedServiceOption.dataset.price);
-      totalPrice += parseInt(selectedStyleOption.dataset.price);
-
-      document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
-        totalPrice += parseInt(cb.dataset.price);
-      });
-      document.getElementById("total-price").innerText = `Estimated Total: ₦${totalPrice.toLocaleString()}`;
-    }
-
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        Swal.fire({
-            icon: 'success',
-            title: 'Message Sent!',
-            text: 'Thank you for your message. We will get back to you soon!',
-            showConfirmButton: false,
-            timer: 3000
-        });
-        this.reset();
-    });
-
-    // Theme Toggle and Color Picker Logic
-    document.addEventListener("DOMContentLoaded", () => {
-      const body = document.body;
-      const themeOptions = document.getElementById('theme-options');
-      const colorPicker = document.getElementById('color-picker');
-      const navbar = document.querySelector('.navbar');
-      const formContainers = document.querySelectorAll('.form-container');
-
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      const savedColor = localStorage.getItem('modernColor') || '#38bdf8';
-
-      setTheme(savedTheme, savedColor);
-
-      themeOptions.addEventListener('click', (e) => {
-        const theme = e.target.closest('button')?.dataset.theme;
-        if (theme) {
-          localStorage.setItem('theme', theme);
-          setTheme(theme, savedColor); // Pass savedColor to maintain accent color
-        }
-      });
-
-      colorPicker.addEventListener('click', (e) => {
-        const color = e.target.closest('button')?.dataset.color;
-        if (color) {
-          localStorage.setItem('modernColor', color);
-          setTheme('modern', color);
-        }
-      });
-      
-      function setTheme(theme, color) {
-        // Apply theme class to the body
-        body.className = '';
-        body.classList.add(theme + '-theme');
-
-        // Apply modern-style class and color if needed
-        if (theme === 'modern') {
-          colorPicker.style.display = 'flex';
-          navbar.classList.add('modern-style');
-          formContainers.forEach(container => container.classList.add('modern-style'));
-          document.documentElement.style.setProperty('--modern-color', color);
-        } else {
-          colorPicker.style.display = 'none';
-          navbar.classList.remove('modern-style');
-          formContainers.forEach(container => container.classList.remove('modern-style'));
-        }
-
-        // Update active state of theme buttons
-        document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.theme-btn[data-theme="${theme}"]`)?.classList.add('active');
-
-        // Update active state of color swatches
-        document.querySelectorAll('.color-swatch').forEach(swatch => swatch.classList.remove('active'));
-        if (theme === 'modern') {
-            document.querySelector(`.color-swatch[data-color="${color}"]`)?.classList.add('active');
-        }
-      }
-    });
-  </script>
 </body>
 </html>

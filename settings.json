@@ -1,0 +1,16 @@
+{
+    "liveServer.settings.port": 5501,
+    "mainScript": "script.js",
+    "theme": "dark",
+    "animations": true,
+    "contactInfo": {
+        "email": "bstdevelopments@gmail.com",
+        "phone": "+234 812 345 6789",
+        "address": "Abuja, Nigeria"
+    },
+    "socials": {
+        "twitter": "#",
+        "linkedin": "#",
+        "github": "#"
+    }
+}
