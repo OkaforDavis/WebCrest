@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetElite Platform - Complete Setup Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #FFD700;
+            padding: 30px;
+            text-align: center;
+            margin: -40px -40px 40px -40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        
+        .section {
+            margin: 40px 0;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            background: #0a0e27;
+            color: #FFD700;
+            padding: 15px 20px;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-left: 5px solid #FFD700;
+        }
+        
+        .subsection {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .subsection h3 {
+            color: #0a0e27;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FFD700;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .command {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            border-left: 3px solid #00ff00;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .danger-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th {
+            background: #0a0e27;
+            color: #FFD700;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f9f9f9;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .checklist li:before {
+            content: "✓ ";
+            font-size: 1.2rem;
+            margin-right: 10px;
+            color: #4caf50;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -30px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: #FFD700;
+            border-radius: 50%;
+        }
+        
+        .file-structure {
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            background: #FFFF00;
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+        
+        .download-section {
+            background: #4caf50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .download-section h3 {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            background: #FFD700;
+            color: #000;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #FFA500;
+        }
+        
+        a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 BetElite Platform</h1>
+            <p>Complete Setup Guide & Documentation</p>
+            <p style="font-size: 1rem; margin-top: 10px;">PHP + MySQL Live eSports Betting Platform</p>
+        </div>
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="section">
+            <h2 class="section-title">📑 Table of Contents</h2>
+            <ol style="font-size: 1.1rem; line-height: 2;">
+                <li><a href="#overview">Platform Overview</a></li>
+                <li><a href="#requirements">System Requirements</a></li>
+                <li><a href="#downloads">Required Downloads</a></li>
+                <li><a href="#installation">Installation Steps</a></li>
+                <li><a href="#database">Database Setup</a></li>
+                <li><a href="#configuration">Configuration</a></li>
+                <li><a href="#filestructure">File Structure</a></li>
+                <li><a href="#api">API Endpoints</a></li>
+                <li><a href="#paystack">Paystack Integration</a></li>
+                <li><a href="#deployment">Deployment Guide</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#security">Security Best Practices</a></li>
+            </ol>
+        </div>
+
+        <!-- PLATFORM OVERVIEW -->
+        <div class="section" id="overview">
+            <h2 class="section-title">🎯 Platform Overview</h2>
+            
+            <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                BetElite is a comprehensive eSports betting platform built with PHP and MySQL, featuring real-time odds, 
+                secure payment integration with Paystack, and a modern responsive design.
+            </p>
+
+            <div class="subsection">
+                <h3>Key Features</h3>
+                <ul style="line-height: 2; font-size: 1.05rem;">
+                    <li>Real-time eSports match betting</li>
+                    <li>Live odds calculation and updates</li>
+                    <li>Secure user authentication and authorization</li>
+                    <li>Paystack payment gateway integration</li>
+                    <li>Wallet system with transaction history</li>
+                    <li>Admin dashboard for match and user management</li>
+                    <li>Responsive mobile-first design</li>
+                    <li>RESTful API architecture</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Technology Stack</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Technology</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Backend</td>
+                            <td>PHP 7.4+</td>
+                            <td>Server-side logic</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>MySQL 5.7+</td>
+                            <td>Data storage</td>
+                        </tr>
+                        <tr>
+                            <td>Frontend</td>
+                            <td>HTML5, CSS3, JavaScript</td>
+                            <td>User interface</td>
+                        </tr>
+                        <tr>
+                            <td>Payment</td>
+                            <td>Paystack API</td>
+                            <td>Payment processing</td>
+                        </tr>
+                        <tr>
+                            <td>Server</td>
+                            <td>Apache/Nginx</td>
+                            <td>Web server</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SYSTEM REQUIREMENTS -->
+        <div class="section" id="requirements">
+            <h2 class="section-title">💻 System Requirements</h2>
+
+            <div class="subsection">
+                <h3>Server Requirements</h3>
+                <ul class="checklist">
+                    <li>PHP 7.4 or higher</li>
+                    <li>MySQL 5.7 or higher / MariaDB 10.2+</li>
+                    <li>Apache 2.4+ or Nginx 1.15+</li>
+                    <li>512MB RAM minimum (1GB recommended)</li>
+                    <li>50MB free disk space</li>
+                    <li>SSL Certificate (for production)</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>PHP Extensions Required</h3>
+                <ul class="checklist">
+                    <li>mysqli or PDO_MySQL</li>
+                    <li>json</li>
+                    <li>curl</li>
+                    <li>openssl</li>
+                    <li>mbstring</li>
+                    <li>session</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 Development Environment:</strong> XAMPP, WAMP, or MAMP are recommended for local development.
+            </div>
+        </div>
+
+        <!-- REQUIRED DOWNLOADS -->
+        <div class="section" id="downloads">
+            <h2 class="section-title">📥 Required Downloads</h2>
+
+            <div class="download-section">
+                <h3>Get Started with BetElite</h3>
+                <p>Download the required software to begin installation</p>
+                <div style="margin-top: 20px;">
+                    <a href="https://www.apachefriends.org/download.html" class="btn">Download XAMPP</a>
+                    <a href="https://code.visualstudio.com/" class="btn">Download VS Code</a>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Additional Tools</h3>
+                <ul style="line-height: 2; font-size: 1.05rem;">
+                    <li><strong>Git:</strong> Version control (optional but recommended)</li>
+                    <li><strong>Composer:</strong> PHP dependency manager (if using libraries)</li>
+                    <li><strong>Postman:</strong> API testing tool</li>
+                    <li><strong>phpMyAdmin:</strong> Included with XAMPP for database management</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- INSTALLATION STEPS -->
+        <div class="section" id="installation">
+            <h2 class="section-title">🚀 Installation Steps</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4 style="color: #0a0e27; margin-bottom: 10px;">Step 1: Install XAMPP</h4>
+                    <p>Download and install XAMPP from the official website. Choose the version that matches your operating system.</p>
+                    <div class="command">
+                        Windows: Run xampp-windows-x64-installer.exe<br>
+                        Mac: Run xampp-osx-installer.dmg<br>
+                        Linux: sudo chmod +x xampp-linux-x64-installer.run && sudo ./xampp-linux-x64-installer.run
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 style="color: #0a0e27; margin-bottom: 10px;">Step 2: Start Apache and MySQL</h4>
+                    <p>Open XAMPP Control Panel and start both Apache and MySQL services.</p>
+                    <div class="success-box">
+                        ✓ Apache should be running on port 80<br>
+                        ✓ MySQL should be running on port 3306
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 style="color: #0a0e27; margin-bottom: 10px;">Step 3: Extract BetElite Files</h4>
+                    <p>Extract the BetElite platform files to the XAMPP htdocs directory:</p>
+                    <div class="command">
+                        Windows: C:\xampp\htdocs\betelite\<br>
+                        Mac/Linux: /Applications/XAMPP/htdocs/betelite/ or /opt/lampp/htdocs/betelite/
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h4 style="color: #0a0e27; margin-bottom: 10px;">Step 4: Set Permissions</h4>
+                    <p>For Mac/Linux, set proper permissions:</p>
+                    <div class="command">
+                        sudo chmod -R 755 /path/to/betelite/<br>
+                        sudo chmod -R 777 /path/to/betelite/uploads/
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DATABASE SETUP -->
+        <div class="section" id="database">
+            <h2 class="section-title">🗄️ Database Setup</h2>
+
+            <div class="subsection">
+                <h3>Creating the Database</h3>
+                <p>Open phpMyAdmin (http://localhost/phpmyadmin) and create a new database:</p>
+                <div class="code-block">
+CREATE DATABASE betelite_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Import Database Schema</h3>
+                <p>Import the provided SQL file to set up all tables:</p>
+                <ol style="line-height: 2; margin: 15px 0; padding-left: 20px;">
+                    <li>In phpMyAdmin, select the betelite_db database</li>
+                    <li>Click on the "Import" tab</li>
+                    <li>Choose the file: betelite_db.sql</li>
+                    <li>Click "Go" to import</li>
+                </ol>
+            </div>
+
+            <div class="subsection">
+                <h3>Database Structure</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Table Name</th>
+                            <th>Purpose</th>
+                            <th>Key Fields</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>users</td>
+                            <td>User accounts</td>
+                            <td>id, username, email, password, wallet_balance</td>
+                        </tr>
+                        <tr>
+                            <td>matches</td>
+                            <td>eSports matches</td>
+                            <td>id, team1, team2, game_type, match_time, status</td>
+                        </tr>
+                        <tr>
+                            <td>bets</td>
+                            <td>User bets</td>
+                            <td>id, user_id, match_id, bet_amount, bet_team, odds</td>
+                        </tr>
+                        <tr>
+                            <td>transactions</td>
+                            <td>Payment history</td>
+                            <td>id, user_id, type, amount, status, reference</td>
+                        </tr>
+                        <tr>
+                            <td>odds</td>
+                            <td>Betting odds</td>
+                            <td>id, match_id, team1_odds, team2_odds, updated_at</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> After importing, verify that all tables are created successfully. 
+                Check that there are no errors in the import log.
+            </div>
+        </div>
+
+        <!-- CONFIGURATION -->
+        <div class="section" id="configuration">
+            <h2 class="section-title">⚙️ Configuration</h2>
+
+            <div class="subsection">
+                <h3>Database Configuration</h3>
+                <p>Edit the config.php file in the root directory:</p>
+                <div class="code-block">
+&lt;?php
+// Database Configuration
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'betelite_db');
+
+// Create connection
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Set charset to utf8mb4
+mysqli_set_charset($conn, "utf8mb4");
+?&gt;
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Site Settings</h3>
+                <p>Configure your site settings in settings.php:</p>
+                <div class="code-block">
+&lt;?php
+// Site Configuration
+define('SITE_NAME', 'BetElite');
+define('SITE_URL', 'http://localhost/betelite');
+define('ADMIN_EMAIL', 'admin@betelite.com');
+
+// Timezone
+date_default_timezone_set('Africa/Accra');
+
+// Session Configuration
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_only_cookies', 1);
+session_start();
+?&gt;
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Environment Variables</h3>
+                <p>Create a .env file for sensitive data (recommended for production):</p>
+                <div class="code-block">
+# Database
+DB_HOST=localhost
+DB_USER=your_username
+DB_PASS=your_password
+DB_NAME=betelite_db
+
+# Paystack
+PAYSTACK_SECRET_KEY=sk_test_xxxxxxxxxxxxx
+PAYSTACK_PUBLIC_KEY=pk_test_xxxxxxxxxxxxx
+
+# Site
+SITE_URL=https://yourdomain.com
+DEBUG_MODE=false
+                </div>
+            </div>
+
+            <div class="danger-box">
+                <strong>🔒 Security Note:</strong> Never commit your .env file or config.php with real credentials to version control. 
+                Add them to .gitignore immediately.
+            </div>
+        </div>
+
+        <!-- FILE STRUCTURE -->
+        <div class="section" id="filestructure">
+            <h2 class="section-title">📁 File Structure</h2>
+
+            <div class="file-structure">
+betelite/
+│
+├── index.php                 # Homepage
+├── config.php               # Database configuration
+├── settings.php             # Site settings
+├── .env                     # Environment variables
+├── .htaccess               # Apache configuration
+│
+├── assets/
+│   ├── css/
+│   │   ├── style.css       # Main styles
+│   │   └── responsive.css  # Mobile styles
+│   ├── js/
+│   │   ├── main.js         # Main JavaScript
+│   │   └── betting.js      # Betting logic
+│   └── images/
+│       ├── logo.png
+│       └── teams/          # Team logos
+│
+├── includes/
+│   ├── header.php          # Site header
+│   ├── footer.php          # Site footer
+│   ├── nav.php             # Navigation
+│   └── functions.php       # Helper functions
+│
+├── api/
+│   ├── auth.php            # Authentication endpoints
+│   ├── bets.php            # Betting endpoints
+│   ├── matches.php         # Match endpoints
+│   ├── payments.php        # Payment endpoints
+│   └── users.php           # User endpoints
+│
+├── admin/
+│   ├── index.php           # Admin dashboard
+│   ├── matches.php         # Manage matches
+│   ├── users.php           # Manage users
+│   ├── bets.php            # View bets
+│   └── settings.php        # Admin settings
+│
+├── user/
+│   ├── dashboard.php       # User dashboard
+│   ├── profile.php         # User profile
+│   ├── wallet.php          # Wallet management
+│   └── history.php         # Bet history
+│
+├── auth/
+│   ├── login.php           # Login page
+│   ├── register.php        # Registration
+│   ├── logout.php          # Logout handler
+│   └── forgot-password.php # Password reset
+│
+├── uploads/                # User uploads
+├── logs/                   # Error logs
+└── database/
+    └── betelite_db.sql    # Database schema
+            </div>
+
+            <div class="info-box">
+                <strong>💡 Tip:</strong> Maintain this structure for easier maintenance and future updates.
+            </div>
+        </div>
+
+        <!-- API ENDPOINTS -->
+        <div class="section" id="api">
+            <h2 class="section-title">🔌 API Endpoints</h2>
+
+            <div class="subsection">
+                <h3>Authentication API</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>/api/auth.php?action=register</td>
+                            <td>POST</td>
+                            <td>Register new user</td>
+                        </tr>
+                        <tr>
+                            <td>/api/auth.php?action=login</td>
+                            <td>POST</td>
+                            <td>User login</td>
+                        </tr>
+                        <tr>
+                            <td>/api/auth.php?action=logout</td>
+                            <td>POST</td>
+                            <td>User logout</td>
+                        </tr>
+                        <tr>
+                            <td>/api/auth.php?action=verify</td>
+                            <td>GET</td>
+                            <td>Verify user session</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subsection">
+                <h3>Betting API</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>/api/bets.php?action=place</td>
+                            <td>POST</td>
+                            <td>Place a new bet</td>
+                        </tr>
+                        <tr>
+                            <td>/api/bets.php?action=list</td>
+                            <td>GET</td>
+                            <td>Get user's bets</td>
+                        </tr>
+                        <tr>
+                            <td>/api/bets.php?action=cancel</td>
+                            <td>POST</td>
+                            <td>Cancel pending bet</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subsection">
+                <h3>Example API Request</h3>
+                <p>Placing a bet via JavaScript:</p>
+                <div class="code-block">
+// Place Bet Example
+fetch('/api/bets.php?action=place', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        match_id: 123,
+        bet_amount: 50.00,
+        bet_team: 'team1',
+        odds: 1.85
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if(data.success) {
+        alert('Bet placed successfully!');
+    } else {
+        alert('Error: ' + data.message);
+    }
+})
+.catch(error => console.error('Error:', error));
+                </div>
+            </div>
+        </div>
+
+        <!-- PAYSTACK INTEGRATION -->
+        <div class="section" id="paystack">
+            <h2 class="section-title">💳 Paystack Integration</h2>
+
+            <div class="subsection">
+                <h3>Setup Paystack Account</h3>
+                <ol style="line-height: 2; margin: 15px 0; padding-left: 20px;">
+                    <li>Visit <a href="https://paystack.com" target="_blank">paystack.com</a> and create an account</li>
+                    <li>Verify your business information</li>
+                    <li>Navigate to Settings → API Keys & Webhooks</li>
+                    <li>Copy your Test and Live API keys</li>
+                </ol>
+            </div>
+
+            <div class="subsection">
+                <h3>Configure Paystack Keys</h3>
+                <p>Add your Paystack keys to the configuration:</p>
+                <div class="code-block">
+&lt;?php
+// Paystack Configuration
+define('PAYSTACK_SECRET_KEY', 'sk_test_your_secret_key_here');
+define('PAYSTACK_PUBLIC_KEY', 'pk_test_your_public_key_here');
+
+// For production, use live keys:
+// define('PAYSTACK_SECRET_KEY', 'sk_live_your_secret_key_here');
+// define('PAYSTACK_PUBLIC_KEY', 'pk_live_your_public_key_here');
+?&gt;
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Deposit Implementation</h3>
+                <div class="code-block">
+// Initialize Paystack Payment
+function initializePayment(amount, email) {
+    fetch('/api/payments.php?action=initialize', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            amount: amount * 100, // Convert to kobo
+            email: email
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.status) {
+            // Redirect to Paystack payment page
+            window.location.href = data.data.authorization_url;
+        }
+    });
+}
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Webhook Configuration</h3>
+                <p>Set up webhook to receive payment notifications:</p>
+                <ol style="line-height: 2; margin: 15px 0; padding-left: 20px;">
+                    <li>In Paystack Dashboard, go to Settings → Webhooks</li>
+                    <li>Add your webhook URL: https://yourdomain.com/api/webhook.php</li>
+                    <li>Select events: charge.success, transfer.success</li>
+                    <li>Save and copy the webhook secret</li>
+                </ol>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Testing:</strong> Always test with Paystack test keys before going live. 
+                Use test card: 4084084084084081, CVV: 408, PIN: 0000
+            </div>
+        </div>
+
+        <!-- DEPLOYMENT -->
+        <div class="section" id="deployment">
+            <h2 class="section-title">🌐 Deployment Guide</h2>
+
+            <div class="subsection">
+                <h3>Pre-Deployment Checklist</h3>
+                <ul class="checklist">
+                    <li>Update all API keys to production values</li>
+                    
