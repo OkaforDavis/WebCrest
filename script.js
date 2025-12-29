@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileMenu && navLinks) {
     mobileMenu.addEventListener('click', () => {
       mobileMenu.classList.toggle('is-active');
-      navLinks.classList.toggle('is-active');
+      navLinks.classList.toggle('active');
     });
 
     // Close menu when clicking nav links
     navLinks.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('is-active');
-        navLinks.classList.remove('is-active');
+        navLinks.classList.remove('active');
       });
     });
   }
