@@ -4,27 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Projects - BST Developments</title>
+    <meta name="description" content="WebCrest delivers innovative web development, design, and digital solutions to elevate your online presence.">
     <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="icon" href="logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
 </head>
 <body>
+    <div class="loader" id="loader"><span></span></div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="sidebar-menu" id="sidebar-menu">
+        <button class="sidebar-close" id="sidebar-close" aria-label="Close Menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="sidebar-nav" id="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About Us</a></li>
+            <li><a href="projects.html" class="nav-link active">Projects</a></li>
+            <li><a href="index.html#services-section" class="nav-link">Services</a></li>
+            <li><a href="index.html#quote-section" class="nav-link">Get a Quote</a></li>
+            <li><a href="index.html#contact-section" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="theme-popup-overlay" id="theme-popup-overlay"></div>
+    <div class="theme-toggle-container" id="theme-toggle-container">
+        <button class="theme-menu-toggle" id="theme-menu-toggle" aria-label="Toggle Theme Menu">
+            <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-menu-content" id="theme-menu-content">
+            <h3>Customize Theme</h3>
+            <div class="theme-divider"></div>
+            <div class="theme-section">
+                <h4>Theme Style</h4>
+                <div class="theme-options" id="theme-options">
+                    <button class="theme-btn" data-theme="dark" aria-label="Dark Theme"><i class="fas fa-moon"></i> Dark</button>
+                    <button class="theme-btn" data-theme="light" aria-label="Light Theme"><i class="fas fa-sun"></i> Light</button>
+                    <button class="theme-btn" data-theme="modern" aria-label="Modern Theme"><i class="fas fa-square"></i> Modern</button>
+                </div>
+            </div>
+            <div class="theme-divider"></div>
+            <div class="theme-section">
+                <h4>Accent Color</h4>
+                <div class="color-picker-container" id="color-picker">
+                    <button class="color-swatch" style="background-color: #38bdf8;" data-color="#38bdf8" aria-label="Sky Blue"></button>
+                    <button class="color-swatch" style="background-color: #facc15;" data-color="#facc15" aria-label="Yellow"></button>
+                    <button class="color-swatch" style="background-color: #ef4444;" data-color="#ef4444" aria-label="Red"></button>
+                    <button class="color-swatch" style="background-color: #22c55e;" data-color="#22c55e" aria-label="Green"></button>
+                    <button class="color-swatch" style="background-color: #8b5cf6;" data-color="#8b5cf6" aria-label="Purple"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="container nav-content">
             <a href="index.html" class="logo-brand">
                 <img src="logo.png" alt="WebCrest Logo" class="logo" loading="lazy">
-                <span class="brand-text">Web<strong>Crest</strong></span>
             </a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-            <ul class="nav-list" id="nav-links">
+            <ul class="nav-list" id="nav-links-desktop">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="about.html" class="nav-link">About Us</a></li>
-                <li><a href=\"projects.html\" class=\"nav-link active\">Portfolio</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
                 <li><a href="index.html#services-section" class="nav-link">Services</a></li>
                 <li><a href="index.html#quote-section" class="nav-link">Get a Quote</a></li>
                 <li><a href="index.html#contact-section" class="nav-link">Contact</a></li>
@@ -106,31 +156,13 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
     <script>
         AOS.init({
             duration: 1000,
             once: true,
             easing: 'ease-in-out',
         });
-
-        // Mobile menu toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navLinks = document.getElementById('nav-links');
-
-        if (mobileMenu && navLinks) {
-            mobileMenu.addEventListener('click', () => {
-                mobileMenu.classList.toggle('is-active');
-                navLinks.classList.toggle('active');
-            });
-
-            // Close menu when a link is clicked
-            navLinks.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('is-active');
-                    navLinks.classList.remove('active');
-                });
-            });
-        }
     </script>
 </body>
 </html>

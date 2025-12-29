@@ -120,6 +120,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Make theme toggle draggable
+  const themeToggleContainer = document.getElementById('theme-toggle-container');
+  if (themeToggleContainer) {
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+    let startX = 0;
+    let startY = 0;
+
+    themeToggleContainer.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.theme-menu-content')) return;
+      isDragging = true;
+      themeToggleContainer.classList.add('dragging');
+      const rect = themeToggleContainer.getBoundingClientRect();
+      startX = e.clientX;
+      startY = e.clientY;
+      offsetX = rect.left;
+      offsetY = rect.top;
+    });
+
+    themeToggleContainer.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.theme-menu-content')) return;
+      isDragging = true;
+      themeToggleContainer.classList.add('dragging');
+      const rect = themeToggleContainer.getBoundingClientRect();
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      offsetX = rect.left;
+      offsetY = rect.top;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+      const newX = offsetX + deltaX;
+      const newY = offsetY + deltaY;
+
+      const maxX = window.innerWidth - themeToggleContainer.offsetWidth;
+      const maxY = window.innerHeight - themeToggleContainer.offsetHeight;
+
+      themeToggleContainer.style.position = 'fixed';
+      themeToggleContainer.style.right = 'auto';
+      themeToggleContainer.style.bottom = 'auto';
+      themeToggleContainer.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
+      themeToggleContainer.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.touches[0].clientX - startX;
+      const deltaY = e.touches[0].clientY - startY;
+      const newX = offsetX + deltaX;
+      const newY = offsetY + deltaY;
+
+      const maxX = window.innerWidth - themeToggleContainer.offsetWidth;
+      const maxY = window.innerHeight - themeToggleContainer.offsetHeight;
+
+      themeToggleContainer.style.position = 'fixed';
+      themeToggleContainer.style.right = 'auto';
+      themeToggleContainer.style.bottom = 'auto';
+      themeToggleContainer.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
+      themeToggleContainer.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+    }, { passive: true });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+      themeToggleContainer.classList.remove('dragging');
+    });
+
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+      themeToggleContainer.classList.remove('dragging');
+    });
+  }
+
   // AOS Initialization
   AOS.init({
     duration: 1000,
