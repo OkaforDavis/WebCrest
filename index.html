@@ -15,6 +15,24 @@
 <body>
   <div class="loader" id="loader"><span></span></div>
 
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Sidebar Menu -->
+  <div class="sidebar-menu" id="sidebar-menu">
+    <button class="sidebar-close" id="sidebar-close" aria-label="Close Menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <ul class="sidebar-nav" id="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="projects.html" class="nav-link">Projects</a></li>
+      <li><a href="#services-section" class="nav-link">Services</a></li>
+      <li><a href="#quote-section" class="nav-link">Get a Quote</a></li>
+      <li><a href="#contact-section" class="nav-link">Contact</a></li>
+    </ul>
+  </div>
+
   <nav class="navbar">
     <div class="container nav-content">
       <a href="index.html" class="logo-brand">
@@ -25,7 +43,7 @@
         <span class="bar"></span>
         <span class="bar"></span>
       </div>
-      <ul class="nav-list" id="nav-links">
+      <ul class="nav-list" id="nav-links-desktop">
         <li><a href="index.html" class="nav-link active">Home</a></li>
         <li><a href="about.html" class="nav-link">About Us</a></li>
         <li><a href="projects.html" class="nav-link">Projects</a></li>
