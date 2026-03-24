@@ -239,10 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
       emailjs.send('service_rqzip6f', 'template_contact', {
-        from_name: document.querySelector('input[name="from_name"]').value,
-        user_email: document.querySelector('input[name="user_email"]').value,
-        message: document.querySelector('textarea[name="message"]').value,
-        to_email: 'Okafordavis8@gmail.com'
+        name: document.querySelector('input[name="from_name"]').value,
+        email: document.querySelector('input[name="user_email"]').value,
+        message: document.querySelector('textarea[name="message"]').value
       })
       .then(() => {
         Swal.fire({
