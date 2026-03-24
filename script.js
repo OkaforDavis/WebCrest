@@ -8,7 +8,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize EmailJS
-  emailjs.init('YOUR_PUBLIC_KEY_HERE'); // Replace with your actual public key
+  emailjs.init('zlN54BfUGWzr08yeX'); // Replace with your actual public key
 
   // Preloader
   const loader = document.getElementById('loader');
