@@ -11,7 +11,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://checkout.flutterwave.com/v3.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
 </head>
 <body>
   <div class="loader" id="loader"><span></span></div>
@@ -318,10 +317,10 @@
         </div>
         <div class="contact-form-container">
           <h3>Send Us a Message</h3>
-          <form id="contact-form">
-            <input type="text" id="sender_name" name="sender_name" placeholder="Your Name" class="input-field" required>
-            <input type="email" id="sender_email" name="sender_email" placeholder="Your Email" class="input-field" required>
-            <textarea id="message" name="message" placeholder="Your Message" rows="5" class="input-field" required></textarea>
+          <form id="contact-form" method="POST" action="https://formspree.io/f/xyzqvjfj">
+            <input type="text" name="name" placeholder="Your Name" class="input-field" required>
+            <input type="email" name="email" placeholder="Your Email" class="input-field" required>
+            <textarea name="message" placeholder="Your Message" rows="5" class="input-field" required></textarea>
             <button type="submit" class="btn btn-primary">Send Message</button>
           </form>
         </div>
