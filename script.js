@@ -7,8 +7,16 @@
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize EmailJS
-  emailjs.init('zlN54BfUGWzr08yeX'); // Replace with your actual public key
+  // Initialize EmailJS - with safety check
+  setTimeout(() => {
+    if (typeof emailjs !== 'undefined') {
+      try {
+        emailjs.init('zlN54BfUGWzr08yeX');
+      } catch (err) {
+        console.warn('EmailJS init failed:', err);
+      }
+    }
+  }, 100);
 
   // Preloader
   const loader = document.getElementById('loader');
