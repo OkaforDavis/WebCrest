@@ -235,15 +235,15 @@
       <div class="testimonials-slider">
         <div class="testimonial-card">
           <p class="quote">"BST Developments transformed our outdated website into a modern, engaging platform. Their attention to detail and responsiveness were exceptional!"</p>
-          <p class="author">- Jane Doe, CEO of Tech Innovations</p>
+          <p class="author">- Sarah Anderson, CEO of Digital Solutions Inc.</p>
         </div>
         <div class="testimonial-card">
           <p class="quote">"Professional, timely, and delivered exactly what we needed. Our new e-commerce store is performing better than ever."</p>
-          <p class="author">- John Smith, Founder of Style Boutique</p>
+          <p class="author">- Michael Chen, Founder of Premium Fashion Co.</p>
         </div>
         <div class="testimonial-card">
           <p class="quote">"The team at BST Developments truly understands design and functionality. Highly recommend their services for any web project."</p>
-          <p class="author">- Emily White, Marketing Director</p>
+          <p class="author">- Victoria Thompson, Director of Creative Services</p>
         </div>
       </div>
   </section>
@@ -317,10 +317,11 @@
         </div>
         <div class="contact-form-container">
           <h3>Send Us a Message</h3>
-          <form id="contact-form">
-            <input type="text" placeholder="Your Name" class="input-field" required>
-            <input type="email" placeholder="Your Email" class="input-field" required>
-            <textarea placeholder="Your Message" rows="5" class="input-field" required></textarea>
+          <form id="contact-form" action="https://formspree.io/f/xpwzzqzj" method="POST">
+            <input type="text" name="name" placeholder="Your Name" class="input-field" required>
+            <input type="email" name="email" placeholder="Your Email" class="input-field" required>
+            <textarea name="message" placeholder="Your Message" rows="5" class="input-field" required></textarea>
+            <input type="hidden" name="_subject" value="New Contact Form Submission from WebCrest">
             <button type="submit" class="btn btn-primary">Send Message</button>
           </form>
         </div>

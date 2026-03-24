@@ -1,3 +1,11 @@
+// Initialize theme immediately to prevent flash of unstyled content
+(function initThemeImmediately() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const savedColor = localStorage.getItem('modernColor') || '#38bdf8';
+  document.body.className = savedTheme + '-theme';
+  document.documentElement.style.setProperty('--modern-color', savedColor);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   // Preloader
   const loader = document.getElementById('loader');
@@ -218,19 +226,49 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      Swal.fire({
-        title: 'Success!',
-        text: 'Your message has been sent successfully.',
-        icon: 'success',
-        confirmButtonText: 'OK',
-        customClass: {
-          popup: 'swal-popup',
-          title: 'swal-title',
-          content: 'swal-content',
-          confirmButton: 'swal-confirm-button',
+      const formData = new FormData(contactForm);
+      
+      fetch('https://formspree.io/f/xpwzzqzj', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
         }
+      })
+      .then(response => {
+        if (response.ok) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Your message has been sent successfully. We will get back to you soon!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            customClass: {
+              popup: 'swal-popup',
+              title: 'swal-title',
+              content: 'swal-content',
+              confirmButton: 'swal-confirm-button',
+            }
+          });
+          contactForm.reset();
+        } else {
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'There was an issue sending your message. Please try again or contact us directly.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+          customClass: {
+            popup: 'swal-popup',
+            title: 'swal-title',
+            content: 'swal-content',
+            confirmButton: 'swal-confirm-button',
+          }
+        });
       });
-      contactForm.reset();
     });
   }
 

@@ -1341,6 +1341,35 @@ footer .footer-links a:hover {
 
 
 /* --- Responsive Design --- */
+
+/* Desktop Styles - Hide Mobile Menu Elements */
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none !important;
+  }
+
+  .sidebar-menu {
+    display: none !important;
+  }
+
+  .sidebar-overlay {
+    display: none !important;
+  }
+
+  .nav-list {
+    display: flex !important;
+  }
+
+  .navbar .nav-content {
+    justify-content: space-between;
+  }
+
+  .logo-brand {
+    flex-shrink: 0;
+    margin-right: auto;
+  }
+}
+
 @media (max-width: 992px) {
   section {
     padding: 4rem 0;
