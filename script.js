@@ -6,6 +6,11 @@
   document.documentElement.style.setProperty('--modern-color', savedColor);
 })();
 
+// Initialize EmailJS
+emailjs.init({
+  publicKey: 'DmCatVsKpJsR5GBkf',
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // Preloader
   const loader = document.getElementById('loader');
@@ -221,44 +226,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Contact Form Submission
+  // Contact Form Submission with EmailJS
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      const formData = new FormData(contactForm);
       
-      fetch('https://formspree.io/f/xpwzzqzj', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+      const senderName = document.getElementById('sender_name')?.value || '';
+      const senderEmail = document.getElementById('sender_email')?.value || '';
+      const message = document.getElementById('message')?.value || '';
+
+      emailjs.send('service_webcrest', 'template_webcrest', {
+        sender_name: senderName,
+        sender_email: senderEmail,
+        message: message,
+        to_email: 'Okafordavis8@gmail.com',
+        reply_to: senderEmail
       })
-      .then(response => {
-        if (response.ok) {
-          Swal.fire({
-            title: 'Success!',
-            text: 'Your message has been sent successfully. We will get back to you soon!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            customClass: {
-              popup: 'swal-popup',
-              title: 'swal-title',
-              content: 'swal-content',
-              confirmButton: 'swal-confirm-button',
-            }
-          });
-          contactForm.reset();
-        } else {
-          throw new Error('Form submission failed');
-        }
+      .then(() => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Your message has been sent successfully. We will get back to you soon!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          customClass: {
+            popup: 'swal-popup',
+            title: 'swal-title',
+            content: 'swal-content',
+            confirmButton: 'swal-confirm-button',
+          }
+        });
+        contactForm.reset();
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error('EmailJS error:', error);
         Swal.fire({
           title: 'Error!',
-          text: 'There was an issue sending your message. Please try again or contact us directly.',
+          text: 'There was an issue sending your message. Please try again or contact us directly at Okafordavis8@gmail.com',
           icon: 'error',
           confirmButtonText: 'OK',
           customClass: {
