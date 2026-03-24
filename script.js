@@ -6,12 +6,14 @@
   document.documentElement.style.setProperty('--modern-color', savedColor);
 })();
 
-// Initialize EmailJS
-emailjs.init({
-  publicKey: 'DmCatVsKpJsR5GBkf',
-});
-
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize EmailJS
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({
+      publicKey: 'DmCatVsKpJsR5GBkf',
+    });
+  }
+
   // Preloader
   const loader = document.getElementById('loader');
   if (loader) {
