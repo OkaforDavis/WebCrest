@@ -6,6 +6,166 @@
   document.documentElement.style.setProperty('--modern-color', savedColor);
 })();
 
+// ============ CURRENCY CONVERSION SYSTEM ============
+const CurrencySystem = {
+  baseCurrency: 'NGN',
+  basePrice: 1, // 1 NGN = base conversion unit
+  userCurrency: 'USD',
+  exchangeRate: 1,
+  currencySymbols: {
+    NGN: '₦', USD: '$', EUR: '€', GBP: '£', JPY: '¥', 
+    INR: '₹', CAD: 'C$', AUD: 'A$', CHF: 'CHF', CNY: '¥',
+    KES: 'KSh', ZAR: 'R', UGX: 'USh', PNG: 'K', GHS: '₵',
+    ETH: 'Br', RWF: 'FRw', TZS: 'TSh', USD: '$'
+  },
+  
+  // Initialize currency system
+  async init() {
+    try {
+      // Get user location and currency
+      const location = await this.getUserLocation();
+      if (location && location.countryCode) {
+        this.userCurrency = this.getCountryCurrency(location.countryCode) || 'USD';
+      }
+      
+      // Fetch exchange rates
+      await this.fetchExchangeRates();
+      
+      // Update all prices on the page
+      this.updateAllPrices();
+      
+      console.log(`✓ Currency System initialized: ${this.baseCurrency} → ${this.userCurrency}`);
+    } catch (err) {
+      console.warn('Currency system initialization failed:', err);
+      // Continue with default USD
+      this.userCurrency = 'USD';
+    }
+  },
+
+  // Get user location via IP geolocation
+  async getUserLocation() {
+    try {
+      const response = await fetch('https://ipapi.co/json/', { timeout: 5000 });
+      const data = await response.json();
+      return {
+        country: data.country_name,
+        countryCode: data.country_code,
+        city: data.city
+      };
+    } catch (err) {
+      console.warn('Geolocation failed:', err);
+      return null;
+    }
+  },
+
+  // Map country code to currency code
+  getCountryCurrency(countryCode) {
+    const countryToCurrency = {
+      'NG': 'NGN', 'US': 'USD', 'GB': 'GBP', 'CA': 'CAD', 'AU': 'AUD',
+      'DE': 'EUR', 'FR': 'EUR', 'IT': 'EUR', 'ES': 'EUR', 'NL': 'EUR',
+      'JP': 'JPY', 'CH': 'CHF', 'CN': 'CNY', 'IN': 'INR',
+      'KE': 'KES', 'ZA': 'ZAR', 'UG': 'UGX', 'PG': 'PNG', 'GH': 'GHS',
+      'ET': 'ETH', 'RW': 'RWF', 'TZ': 'TZS'
+    };
+    return countryToCurrency[countryCode] || null;
+  },
+
+  // Fetch exchange rates
+  async fetchExchangeRates() {
+    try {
+      // Check cache first (valid for 1 hour)
+      const cached = localStorage.getItem('exchangeRate_' + this.userCurrency);
+      const cacheTime = localStorage.getItem('exchangeRateTime');
+      const now = Date.now();
+      
+      if (cached && cacheTime && (now - parseInt(cacheTime)) < 3600000) {
+        this.exchangeRate = parseFloat(cached);
+        return;
+      }
+
+      // Fetch from exchangerate-api
+      const response = await fetch(
+        `https://api.exchangerate-api.com/v4/latest/${this.baseCurrency}`
+      );
+      const data = await response.json();
+      
+      this.exchangeRate = data.rates[this.userCurrency] || 1;
+      
+      // Cache the rate
+      localStorage.setItem('exchangeRate_' + this.userCurrency, this.exchangeRate);
+      localStorage.setItem('exchangeRateTime', now);
+    } catch (err) {
+      console.warn('Exchange rate fetch failed:', err);
+      this.exchangeRate = 1;
+    }
+  },
+
+  // Convert price from base currency to user currency
+  convertPrice(priceInBase) {
+    return Math.round((priceInBase / (this.baseCurrency === 'NGN' ? 411 : 1)) * this.exchangeRate);
+  },
+
+  // Format price with symbol
+  formatPrice(priceInBase) {
+    const converted = this.convertPrice(priceInBase);
+    const symbol = this.currencySymbols[this.userCurrency] || this.userCurrency;
+    return `${symbol}${converted.toLocaleString()}`;
+  },
+
+  // Update all prices in quote form
+  updateAllPrices() {
+    // Update service options
+    const serviceSelect = document.getElementById('service');
+    if (serviceSelect) {
+      serviceSelect.querySelectorAll('option[data-price]').forEach(option => {
+        const price = parseInt(option.getAttribute('data-price'));
+        if (price > 0) {
+          const serviceName = option.text.split('(')[0].trim();
+          option.text = `${serviceName} (${this.formatPrice(price)})`;
+        }
+      });
+    }
+
+    // Update style options
+    const styleSelect = document.getElementById('style');
+    if (styleSelect) {
+      styleSelect.querySelectorAll('option[data-price]').forEach(option => {
+        const price = parseInt(option.getAttribute('data-price'));
+        if (price > 0) {
+          const styleName = option.text.split('(')[0].trim();
+          option.text = `${styleName} (${this.formatPrice(price)})`;
+        }
+      });
+    }
+
+    // Update feature checkboxes
+    const checkboxes = document.querySelectorAll('.checkbox-group label');
+    checkboxes.forEach(label => {
+      const checkbox = label.querySelector('input[type="checkbox"]');
+      if (checkbox && checkbox.getAttribute('data-price')) {
+        const price = parseInt(checkbox.getAttribute('data-price'));
+        const featureName = label.textContent.split('(')[0].trim();
+        label.textContent = `${featureName} (${this.formatPrice(price)})`;
+        label.insertAdjacentElement('afterbegin', checkbox);
+      }
+    });
+
+    // Update currency indicator
+    const currencyIndicator = document.getElementById('currency-indicator');
+    if (currencyIndicator) {
+      const symbol = this.currencySymbols[this.userCurrency] || this.userCurrency;
+      currencyIndicator.textContent = `💱 Prices shown in ${this.userCurrency} (${symbol}) • Exchange rate: 1 NGN = ${(this.exchangeRate / 411).toFixed(6)} ${this.userCurrency}`;
+    }
+
+    // Store conversion info
+    localStorage.setItem('userCurrency', this.userCurrency);
+    localStorage.setItem('exchangeRate', this.exchangeRate);
+  }
+};
+
+// Initialize currency system on page load
+window.addEventListener('load', () => CurrencySystem.init());
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize EmailJS - with safety check
   setTimeout(() => {
@@ -384,15 +544,19 @@ function calculateQuote() {
     total += featurePrice;
   });
 
-  // Display total price
+  // Display total price with currency conversion
   if (total > 0) {
-    totalPriceDisplay.textContent = `Total Estimated Price: ₦${total.toLocaleString()}`;
+    const formattedPrice = CurrencySystem.formatPrice(total);
+    const symbol = CurrencySystem.currencySymbols[CurrencySystem.userCurrency] || CurrencySystem.userCurrency;
+    
+    totalPriceDisplay.textContent = `Total Estimated Price: ${formattedPrice}`;
     totalPriceDisplay.style.display = 'block';
     
     if (payButton) {
-      payButton.textContent = `💳 Pay ₦${total.toLocaleString()}`;
+      payButton.textContent = `💳 Pay ${formattedPrice}`;
       payButton.style.display = 'inline-flex';
       payButton.dataset.amount = total;
+      payButton.dataset.currency = CurrencySystem.userCurrency;
     }
   } else {
     totalPriceDisplay.textContent = '';
