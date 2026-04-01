@@ -8,9 +8,9 @@
 
 // ============ CURRENCY CONVERSION SYSTEM ============
 const CurrencySystem = {
-  baseCurrency: 'NGN',
-  basePrice: 1, // 1 NGN = base conversion unit
-  userCurrency: 'USD',
+  baseCurrency: 'GHS', // Ghana Cedis is now base currency
+  basePrice: 1, // 1 GHS = base conversion unit
+  userCurrency: 'GHS', // Default to Ghana
   exchangeRate: 1,
   currencySymbols: {
     NGN: '₦', USD: '$', EUR: '€', GBP: '£', JPY: '¥', 
@@ -25,11 +25,16 @@ const CurrencySystem = {
       // Get user location and currency
       const location = await this.getUserLocation();
       if (location && location.countryCode) {
-        this.userCurrency = this.getCountryCurrency(location.countryCode) || 'USD';
+        const detectedCurrency = this.getCountryCurrency(location.countryCode);
+        this.userCurrency = detectedCurrency || 'USD';
       }
       
-      // Fetch exchange rates
-      await this.fetchExchangeRates();
+      // Only fetch exchange rates if user is NOT in Ghana
+      if (this.userCurrency !== 'GHS') {
+        await this.fetchExchangeRates();
+      } else {
+        this.exchangeRate = 1; // No conversion needed for Ghana
+      }
       
       // Update all prices on the page
       this.updateAllPrices();
@@ -37,7 +42,10 @@ const CurrencySystem = {
       console.log(`✓ Currency System initialized: ${this.baseCurrency} → ${this.userCurrency}`);
     } catch (err) {
       console.warn('Currency system initialization failed:', err);
-      // Continue with default USD
+      // Continue with GHS as default
+      this.userCurrency = 'GHS';
+    }
+  },
       this.userCurrency = 'USD';
     }
   },
@@ -100,9 +108,9 @@ const CurrencySystem = {
     }
   },
 
-  // Convert price from base currency to user currency
+  // Convert price from base currency (GHS) to user currency
   convertPrice(priceInBase) {
-    return Math.round((priceInBase / (this.baseCurrency === 'NGN' ? 411 : 1)) * this.exchangeRate);
+    return Math.round(priceInBase * this.exchangeRate);
   },
 
   // Format price with symbol
@@ -154,7 +162,11 @@ const CurrencySystem = {
     const currencyIndicator = document.getElementById('currency-indicator');
     if (currencyIndicator) {
       const symbol = this.currencySymbols[this.userCurrency] || this.userCurrency;
-      currencyIndicator.textContent = `💱 Prices shown in ${this.userCurrency} (${symbol}) • Exchange rate: 1 NGN = ${(this.exchangeRate / 411).toFixed(6)} ${this.userCurrency}`;
+      if (this.userCurrency === 'GHS') {
+        currencyIndicator.textContent = `💱 Prices shown in Ghana Cedis (${symbol})`;
+      } else {
+        currencyIndicator.textContent = `💱 Prices shown in ${this.userCurrency} (${symbol}) • Exchange rate: 1 GHS = ${this.exchangeRate.toFixed(4)} ${this.userCurrency}`;
+      }
     }
 
     // Store conversion info
