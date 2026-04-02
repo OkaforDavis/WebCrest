@@ -483,6 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
 
       const templateParams = {
+        title: 'New Contact Form Submission',
         to_email: 'webcrest70@gmail.com',
         name: document.querySelector('input[name="from_name"]').value,
         email: document.querySelector('input[name="user_email"]').value,
