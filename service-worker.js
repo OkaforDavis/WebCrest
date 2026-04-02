@@ -1,12 +1,12 @@
 const CACHE_NAME = 'webcrest-v1';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/about.html',
-  '/projects.html',
-  '/style.css',
-  '/script.js',
-  '/manifest.json',
+  '/WebCrest/',
+  '/WebCrest/index.html',
+  '/WebCrest/about.html',
+  '/WebCrest/projects.html',
+  '/WebCrest/style.css',
+  '/WebCrest/script.js',
+  '/WebCrest/manifest.json',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
@@ -25,13 +25,13 @@ self.addEventListener('install', event => {
         console.warn('Some assets failed to cache:', err);
         // Cache what we can, don't fail on CDN assets
         return cache.addAll([
-          '/',
-          '/index.html',
-          '/about.html',
-          '/projects.html',
-          '/style.css',
-          '/script.js',
-          '/manifest.json'
+          '/WebCrest/',
+          '/WebCrest/index.html',
+          '/WebCrest/about.html',
+          '/WebCrest/projects.html',
+          '/WebCrest/style.css',
+          '/WebCrest/script.js',
+          '/WebCrest/manifest.json'
         ]);
       });
     })
@@ -87,7 +87,7 @@ self.addEventListener('fetch', event => {
         .catch(() => {
           // Offline: return cached version
           return caches.match(request).then(cachedResponse => {
-            return cachedResponse || caches.match('/index.html');
+            return cachedResponse || caches.match('/WebCrest/index.html');
           });
         })
     );

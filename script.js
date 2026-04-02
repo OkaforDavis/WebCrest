@@ -2,7 +2,7 @@
 // Register Service Worker for offline support and installation
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+    navigator.serviceWorker.register('/WebCrest/service-worker.js', { scope: '/WebCrest/' })
       .then(registration => {
         console.log('✓ Service Worker registered successfully:', registration);
         
