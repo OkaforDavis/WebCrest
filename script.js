@@ -485,7 +485,8 @@ document.addEventListener('DOMContentLoaded', () => {
       emailjs.send('service_rqzip6f', 'template_contact', {
         name: document.querySelector('input[name="from_name"]').value,
         email: document.querySelector('input[name="user_email"]').value,
-        message: document.querySelector('textarea[name="message"]').value
+        message: document.querySelector('textarea[name="message"]').value,
+        time: new Date().toLocaleString()
       })
       .then(() => {
         Swal.fire({
