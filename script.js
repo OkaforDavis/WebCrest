@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     if (typeof emailjs !== 'undefined') {
       try {
-        emailjs.init('zlN54BfUGWzr08yeX');
+        emailjs.init('zVAa5_d3fjGbxzet5');
       } catch (err) {
         console.warn('EmailJS init failed:', err);
       }
@@ -482,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      emailjs.send('service_rqzip6f', 'template_contact', {
+      emailjs.send('service_nv4yx6s', 'template_fcmfkjb', {
         name: document.querySelector('input[name="from_name"]').value,
         email: document.querySelector('input[name="user_email"]').value,
         message: document.querySelector('textarea[name="message"]').value,
