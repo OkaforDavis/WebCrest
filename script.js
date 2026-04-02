@@ -482,13 +482,19 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      emailjs.send('service_nv4yx6s', 'template_fcmfkjb', {
+      const templateParams = {
+        to_email: 'webcrest70@gmail.com',
         name: document.querySelector('input[name="from_name"]').value,
         email: document.querySelector('input[name="user_email"]').value,
         message: document.querySelector('textarea[name="message"]').value,
         time: new Date().toLocaleString()
-      })
-      .then(() => {
+      };
+
+      console.log('Sending email with params:', templateParams);
+
+      emailjs.send('service_nv4yx6s', 'template_fcmfkjb', templateParams)
+      .then((response) => {
+        console.log('Email sent successfully:', response);
         Swal.fire({
           title: 'Success!',
           text: 'Your message has been sent successfully. We will get back to you soon!',
@@ -505,9 +511,11 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch((error) => {
         console.error('EmailJS error:', error);
+        console.error('Error status:', error.status);
+        console.error('Error text:', error.text);
         Swal.fire({
           title: 'Error!',
-          text: 'There was an issue sending your message. Please try again or contact us directly at Okafordavis8@gmail.com',
+          text: 'There was an issue sending your message. Please try again or contact us directly at webcrest70@gmail.com',
           icon: 'error',
           confirmButtonText: 'OK',
           customClass: {
