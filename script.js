@@ -53,7 +53,14 @@ const CurrencySystem = {
   // Get user location via IP geolocation
   async getUserLocation() {
     try {
-      const response = await fetch('https://ipapi.co/json/', { timeout: 5000 });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+      
+      const response = await fetch('https://ipapi.co/json/', { 
+        signal: controller.signal 
+      });
+      clearTimeout(timeoutId);
+      
       const data = await response.json();
       return {
         country: data.country_name,
@@ -91,10 +98,16 @@ const CurrencySystem = {
         return;
       }
 
-      // Fetch from exchangerate-api
+      // Fetch from exchangerate-api with timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+      
       const response = await fetch(
-        `https://api.exchangerate-api.com/v4/latest/${this.baseCurrency}`
+        `https://api.exchangerate-api.com/v4/latest/${this.baseCurrency}`,
+        { signal: controller.signal }
       );
+      clearTimeout(timeoutId);
+      
       const data = await response.json();
       
       this.exchangeRate = data.rates[this.userCurrency] || 1;
@@ -175,8 +188,13 @@ const CurrencySystem = {
   }
 };
 
-// Initialize currency system on page load
-window.addEventListener('load', () => CurrencySystem.init());
+// Initialize currency system asynchronously (non-blocking)
+// Use setTimeout to ensure it runs after page content is visible
+setTimeout(() => {
+  CurrencySystem.init().catch(err => {
+    console.warn('Currency system failed to initialize:', err);
+  });
+}, 500);
 
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize EmailJS - with safety check
