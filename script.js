@@ -22,32 +22,55 @@ const CurrencySystem = {
   // Initialize currency system
   async init() {
     try {
-      // Get user location and currency
-      const location = await this.getUserLocation();
-      if (location && location.countryCode) {
-        const detectedCurrency = this.getCountryCurrency(location.countryCode);
-        this.userCurrency = detectedCurrency || 'USD';
-      }
+      // Default to GHS - show page immediately
+      this.userCurrency = 'GHS';
+      this.exchangeRate = 1;
       
-      // Only fetch exchange rates if user is NOT in Ghana
-      if (this.userCurrency !== 'GHS') {
-        await this.fetchExchangeRates();
-      } else {
-        this.exchangeRate = 1; // No conversion needed for Ghana
-      }
-      
-      // Update all prices on the page
+      // Update prices with default currency
       this.updateAllPrices();
+      
+      // Try to detect location in the background (non-blocking)
+      this.detectLocationInBackground();
       
       console.log(`✓ Currency System initialized: ${this.baseCurrency} → ${this.userCurrency}`);
     } catch (err) {
       console.warn('Currency system initialization failed:', err);
-      // Continue with GHS as default
+      // Still show GHS as fallback
       this.userCurrency = 'GHS';
+      this.updateAllPrices();
     }
   },
-      this.userCurrency = 'USD';
-    }
+
+  // Detect location in background without blocking
+  detectLocationInBackground() {
+    Promise.race([
+      this.getUserLocation(),
+      new Promise(resolve => setTimeout(() => resolve(null), 2000)) // 2 second max wait
+    ]).then(location => {
+      if (location && location.countryCode) {
+        const detectedCurrency = this.getCountryCurrency(location.countryCode);
+        if (detectedCurrency && detectedCurrency !== 'GHS') {
+          this.userCurrency = detectedCurrency;
+          // Try to fetch exchange rates
+          this.fetchExchangeRatesInBackground();
+        }
+      }
+    }).catch(err => {
+      console.warn('Background location detection failed:', err);
+    });
+  },
+
+  // Fetch exchange rates in background
+  fetchExchangeRatesInBackground() {
+    Promise.race([
+      this.fetchExchangeRates(),
+      new Promise(resolve => setTimeout(() => resolve(null), 2000)) // 2 second max wait
+    ]).then(() => {
+      // If we got rates, update prices
+      this.updateAllPrices();
+    }).catch(err => {
+      console.warn('Background exchange rate fetch failed:', err);
+    });
   },
 
   // Get user location via IP geolocation
