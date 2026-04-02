@@ -1,4 +1,4 @@
-const CACHE_NAME = 'webcrest-v1';
+const CACHE_NAME = 'webcrest-v2';
 const STATIC_ASSETS = [
   '/WebCrest/',
   '/WebCrest/index.html',
