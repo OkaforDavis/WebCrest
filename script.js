@@ -1,3 +1,62 @@
+// ============ PROGRESSIVE WEB APP SETUP ============
+// Register Service Worker for offline support and installation
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+      .then(registration => {
+        console.log('✓ Service Worker registered successfully:', registration);
+        
+        // Check for updates periodically
+        setInterval(() => {
+          registration.update();
+        }, 60000); // Check every minute
+        
+        // Listen for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // New version available
+              console.log('✓ New version available! Reload to update.');
+              // Optional: Show notification to user
+            }
+          });
+        });
+      })
+      .catch(err => {
+        console.warn('Service Worker registration failed:', err);
+      });
+  });
+}
+
+// Handle app installation prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  console.log('Install prompt available');
+  // Prevent the mini-infobar from appearing
+  e.preventDefault();
+  // Stash the event for later use
+  deferredPrompt = e;
+  // Show install button to user
+  showInstallButton();
+});
+
+function showInstallButton() {
+  const installButton = document.getElementById('install-app-btn');
+  if (installButton) {
+    installButton.style.display = 'flex';
+    installButton.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response: ${outcome}`);
+        deferredPrompt = null;
+        installButton.style.display = 'none';
+      }
+    });
+  }
+}
+
 // Initialize theme immediately to prevent flash of unstyled content
 (function initThemeImmediately() {
   const savedTheme = localStorage.getItem('theme') || 'dark';
