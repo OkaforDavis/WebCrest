@@ -1,3 +1,12 @@
+// ✅ Initialize EmailJS immediately when script loads
+// This must be called BEFORE any emailjs.send() calls
+if (typeof emailjs !== 'undefined') {
+  emailjs.init('zVAa5_d3fjGbxzet5'); // Public Key from EmailJS Dashboard
+  console.log('✓ EmailJS initialized');
+} else {
+  console.warn('⚠️ EmailJS library not loaded yet');
+}
+
 // ============ PROGRESSIVE WEB APP SETUP ============
 // Register Service Worker for offline support and installation
 if ('serviceWorker' in navigator) {
@@ -251,17 +260,6 @@ setTimeout(() => {
 }, 500);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize EmailJS - with safety check
-  setTimeout(() => {
-    if (typeof emailjs !== 'undefined') {
-      try {
-        emailjs.init('zVAa5_d3fjGbxzet5');
-      } catch (err) {
-        console.warn('EmailJS init failed:', err);
-      }
-    }
-  }, 100);
-
   // Preloader
   const loader = document.getElementById('loader');
   if (loader) {
