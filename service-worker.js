@@ -7,6 +7,7 @@ const STATIC_ASSETS = [
   '/WebCrest/style.css',
   '/WebCrest/script.js',
   '/WebCrest/manifest.json',
+  '/WebCrest/logo.png',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
@@ -31,7 +32,8 @@ self.addEventListener('install', event => {
           '/WebCrest/projects.html',
           '/WebCrest/style.css',
           '/WebCrest/script.js',
-          '/WebCrest/manifest.json'
+          '/WebCrest/manifest.json',
+          '/WebCrest/logo.png'
         ]);
       });
     })
