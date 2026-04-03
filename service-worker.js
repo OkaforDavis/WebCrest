@@ -1,4 +1,4 @@
-const CACHE_NAME = 'webcrest-v2';
+const CACHE_NAME = 'webcrest-v3';
 const STATIC_ASSETS = [
   '/WebCrest/',
   '/WebCrest/index.html',
@@ -13,7 +13,7 @@ const STATIC_ASSETS = [
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
   'https://cdn.jsdelivr.net/npm/sweetalert2@11',
   'https://checkout.flutterwave.com/v3.js',
-  'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js'
+  'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js'
 ];
 
 // Install Service Worker
