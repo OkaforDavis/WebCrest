@@ -1,4 +1,4 @@
-const CACHE_NAME = 'webcrest-v3';
+const CACHE_NAME = 'webcrest-v4';
 const STATIC_ASSETS = [
   '/WebCrest/',
   '/WebCrest/index.html',
@@ -8,6 +8,7 @@ const STATIC_ASSETS = [
   '/WebCrest/script.js',
   '/WebCrest/manifest.json',
   '/WebCrest/logo.png',
+  '/WebCrest/favicon.svg',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
