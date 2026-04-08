@@ -22,9 +22,9 @@
       "purpose": "any"
     },
     {
-      "src": "/WebCrest/logo.png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230066cc' width='512' height='512' rx='80'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' font-size='260' fill='white' font-weight='bold' font-family='Arial'>WC</text></svg>",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "maskable"
     }
   ],
