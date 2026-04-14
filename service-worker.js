@@ -1,4 +1,4 @@
-const CACHE_NAME = 'webcrest-v8';
+const CACHE_NAME = 'webcrest-v9';
 const STATIC_ASSETS = [
   '/WebCrest/',
   '/WebCrest/index.html',
@@ -8,6 +8,8 @@ const STATIC_ASSETS = [
   '/WebCrest/script.js',
   '/WebCrest/manifest.json',
   '/WebCrest/logo.png',
+  '/WebCrest/icon-192.png',
+  '/WebCrest/icon-512.png',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
@@ -33,7 +35,9 @@ self.addEventListener('install', event => {
           '/WebCrest/style.css',
           '/WebCrest/script.js',
           '/WebCrest/manifest.json',
-          '/WebCrest/logo.png'
+          '/WebCrest/logo.png',
+          '/WebCrest/icon-192.png',
+          '/WebCrest/icon-512.png'
         ]);
       });
     })
