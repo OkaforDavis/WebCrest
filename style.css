@@ -586,36 +586,20 @@ section {
   position: relative;
   font-weight: 500;
   border-radius: 6px;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 1.25rem;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-light-blue), var(--color-primary-blue));
-  transition: width 0.3s var(--transition-smooth);
+  border-bottom: 3px solid transparent;
 }
 
 .nav-link:hover {
   color: var(--text-color-link);
   background-color: rgba(0, 136, 255, 0.12);
+  border-bottom-color: var(--text-color-link);
   transform: translateY(-2px);
-}
-
-.nav-link:hover::after {
-  width: calc(100% - 2.5rem);
 }
 
 .nav-link.active {
   color: var(--text-color-link);
   background-color: rgba(0, 136, 255, 0.15);
-}
-
-.nav-link.active::after {
-  width: calc(100% - 2.5rem);
+  border-bottom-color: var(--text-color-link);
 }
 
 /* --- SECTIONS & CARDS --- */
@@ -2316,8 +2300,7 @@ img {
 
 /* High DPI Screens */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .btn::before,
-  .nav-link::after {
+  .btn::before {
     content: '';
     position: absolute;
   }
