@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Fashion Store | BST Developments</title>
+    <meta name="description" content="Case study for E-commerce Fashion Store, a sleek fashion platform by WebCrest.">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" href="/WebCrest/logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Modern Minimalist Template Overrides */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --modern-primary: #000000;
+            --modern-accent: #ff3366; /* Hot Pink Accent */
+            --modern-text: #1a1a1a;
+            --modern-bg: #ffffff;
+            --font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-family);
+        }
+
+        .modern-hero {
+            background-color: var(--modern-bg);
+            padding: 10rem 2rem 5rem;
+            position: relative;
+            color: var(--modern-text);
+            text-align: left;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .dark-theme .modern-hero {
+            background-color: #050505;
+            color: #ffffff;
+            border-bottom-color: #222;
+        }
+
+        .modern-badge {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--modern-accent);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .modern-badge::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 2px;
+            background-color: var(--modern-accent);
+        }
+
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .modern-hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .modern-hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .dark-theme .modern-hero p { color: #888; }
+
+        .client-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 2rem;
+            mix-blend-mode: multiply;
+        }
+
+        .dark-theme .client-logo { mix-blend-mode: screen; filter: invert(1); }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.7s ease;
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .modern-details {
+            background-color: #fafafa;
+            padding: 8rem 2rem;
+        }
+
+        .dark-theme .modern-details {
+            background-color: #0a0a0a;
+        }
+
+        .section-header {
+            max-width: 800px;
+            margin: 0 auto 5rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 0;
+            border: 1px solid #eaeaea;
+            transition: all 0.3s ease;
+        }
+
+        .dark-theme .feature-card {
+            background: #111;
+            border-color: #222;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-color: var(--modern-accent);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--modern-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        .dark-theme .feature-card p { color: #888; }
+
+        .minimal-tech {
+            margin-top: 5rem;
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .dark-theme .minimal-tech { border-color: #222; }
+
+        .minimal-tech-icons {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            color: #ccc;
+            font-size: 2.5rem;
+        }
+
+        .dark-theme .minimal-tech-icons { color: #333; }
+
+        .minimal-tech-icons i { transition: color 0.3s ease; }
+        .minimal-tech-icons i:hover { color: var(--modern-accent); }
+
+        @media (max-width: 900px) {
+            .hero-split { grid-template-columns: 1fr; }
+            .modern-hero h1 { font-size: 3rem; }
+            .feature-showcase { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Standard WebCrest) -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo-brand">
+                <img src="/WebCrest/logo.png" alt="WebCrest Logo" class="logo" loading="lazy">
+            </a>
+            <ul class="nav-list" id="nav-links-desktop">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="index.html#contact-section" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle (Standard) -->
+    <div class="theme-toggle-container" id="theme-toggle-container">
+        <button class="theme-menu-toggle" id="theme-menu-toggle" aria-label="Toggle Theme Menu">
+            <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-menu-content" id="theme-menu-content">
+            <h3>Customize Theme</h3>
+            <div class="theme-divider"></div>
+            <div class="theme-section">
+                <div class="theme-options" id="theme-options">
+                    <button class="theme-btn" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+                    <button class="theme-btn" data-theme="light"><i class="fas fa-sun"></i> Light</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case Study Hero -->
+    <header class="modern-hero">
+        <div class="hero-split">
+            <div class="modern-hero-content" data-aos="fade-right">
+                <img src="project_assets/logo_fashion_1776184914895.png" alt="Lumiere Fashion Logo" class="client-logo">
+                <div class="modern-badge">E-Commerce Architecture</div>
+                <h1>The Future of Premium Retail.</h1>
+                <p>We completely overhauled Lumiere Fashion's digital storefront, merging ultra-minimalist luxury aesthetics with high-performance Headless Commerce infrastructure.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#case-study" class="btn btn-primary" style="background: var(--modern-accent); border: none; border-radius: 0;">Read Case Study</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper" data-aos="fade-left" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1555529669-e685f02c63f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Lumiere Storefront">
+            </div>
+        </div>
+    </header>
+
+    <!-- Case Study Details -->
+    <section id="case-study" class="modern-details">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Seamless Shopping Experience</h2>
+            <p style="color: #666; font-size: 1.1rem; line-height: 1.6;">By stripping away the visual clutter, we allowed the products to speak for themselves. The redesign focused on micro-interactions, high-speed image loading, and frictionless checkouts.</p>
+        </div>
+
+        <div class="feature-showcase">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-tachometer-alt feature-icon"></i>
+                <h3>Headless Commerce</h3>
+                <p>Decoupled frontend from backend allowed us to achieve sub-second page loads globally, crucial for high-conversion fashion retail.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-mobile-alt feature-icon"></i>
+                <h3>Mobile-First Luxury</h3>
+                <p>Optimized touch targets, intuitive swipe galleries, and Apple/Google Pay integrations tailored specifically for on-the-go shoppers.</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-magic feature-icon"></i>
+                <h3>AI Recommendations</h3>
+                <p>Integrated machine learning to provide personalized outfits and sizing suggestions, increasing average order value by 24%.</p>
+            </div>
+        </div>
+
+        <div class="minimal-tech" data-aos="fade-in" data-aos-offset="50">
+            <span style="font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Powered By</span>
+            <div class="minimal-tech-icons">
+                <i class="fab fa-shopify" title="Shopify Plus"></i>
+                <i class="fab fa-react" title="Next.js"></i>
+                <i class="fab fa-js-square" title="JavaScript"></i>
+                <i class="fab fa-aws" title="AWS"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple CTA -->
+    <section class="modern-hero" style="padding: 6rem 2rem; text-align: center;">
+        <h2 style="font-size: 3rem; margin-bottom: 1.5rem; font-weight:800; letter-spacing: -1px;">Ready to Elevate Your Brand?</h2>
+        <a href="index.html#contact-section" class="btn btn-primary" style="background: var(--modern-primary); border:none; border-radius: 0; padding: 1rem 3rem;">Start Project</a>
+    </section>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, easing: 'ease-out' });
+    </script>
+</body>
+</html>

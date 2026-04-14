@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Portfolio & Blog | BST Developments</title>
+    <meta name="description" content="Case study for an immersive Artist Portfolio built by WebCrest.">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" href="/WebCrest/logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Premium Dark Glassmorphic Template */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap');
+
+        body {
+            background-color: #0f1115;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .dark-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Ambient Glow Behind Hero */
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            filter: blur(80px);
+            animation: pulse-glow 8s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 4rem;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .artist-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 5px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .dark-hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .dark-hero p {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .visual-gallery {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            group: hover;
+        }
+
+        .glass-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease, filter 0.7s ease;
+            filter: grayscale(80%) brightness(0.7);
+        }
+
+        .glass-card:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .glass-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover .glass-card-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .btn-glass {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 400;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-glass:hover {
+            background: white;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .dark-hero h1 { font-size: 2.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .glass-panel { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Standard WebCrest) -->
+    <nav class="navbar" style="background: rgba(15,17,21,0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="container nav-content">
+            <a href="index.html" class="logo-brand">
+                <img src="/WebCrest/logo.png" alt="WebCrest Logo" class="logo" loading="lazy">
+            </a>
+            <ul class="nav-list" id="nav-links-desktop">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="index.html#contact-section" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Case Study Hero -->
+    <header class="dark-hero">
+        <div class="ambient-glow"></div>
+        <div class="glass-panel" data-aos="fade-up">
+            <img src="project_assets/logo_artist_1776185289023.png" alt="Artist Logo" class="artist-logo">
+            <h1>Immersive Visual Canvas.</h1>
+            <p>A digital gallery built for a contemporary artist. We replaced standard scroll behavior with a fluid, WebGL-powered exploration mode, allowing art pieces to float and interact with the user's cursor as if in a physical space.</p>
+            <div style="margin-top: 2rem;">
+                <a href="#gallery" class="btn-glass">Enter Gallery</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Visual Specs -->
+    <section id="gallery" class="visual-gallery">
+        <div style="text-align: center; margin-bottom: 4rem;" data-aos="fade-in">
+            <h2 style="font-size: 2.5rem; font-weight: 300;">Technical Elegance</h2>
+            <p style="color: #888;">Designed without borders.</p>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="100" style="height: 500px;">
+                <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Art 1">
+                <div class="glass-card-content">
+                    <h3 style="margin-bottom: 5px;">Fluid Image Rendering</h3>
+                    <p style="color: #aaa; font-size: 0.9rem;">Images are lazy-loaded through custom WebGL shaders to create a water-like ripple transition upon reveal.</p>
+                </div>
+            </div>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="200" style="height: 500px;">
+                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Art 2">
+                <div class="glass-card-content">
+                    <h3 style="margin-bottom: 5px;">Typographic Focus</h3>
+                    <p style="color: #aaa; font-size: 0.9rem;">Minimal interface elements ensure the artwork reigns supreme, paired with variable sans-serif typography.</p>
+                </div>
+            </div>
+            
+            <div class="glass-card" data-aos="fade-up" data-aos-delay="300" style="height: 500px;">
+                <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Art 3">
+                <div class="glass-card-content">
+                    <h3 style="margin-bottom: 5px;">Integrated CMS capabilities</h3>
+                    <p style="color: #aaa; font-size: 0.9rem;">A hidden headless CMS allows the artist to upload new collections instantly from their mobile device.</p>
+                </div>
+            </div>
+            
+            <div class="glass-card" style="background: rgba(139, 92, 246, 0.05); display: flex; align-items: center; justify-content: center; height: 500px; text-align: center; padding: 2rem;" data-aos="fade-up" data-aos-delay="400">
+                <div>
+                    <i class="fas fa-magic" style="font-size: 3rem; color: #8b5cf6; margin-bottom: 1rem;"></i>
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Craft Your Vision</h3>
+                    <p style="color: #999; margin-bottom: 2rem;">Want an artistic, premium website for your personal brand?</p>
+                    <a href="index.html#contact-section" class="btn-glass" style="border-color: #8b5cf6; color: #8b5cf6;">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem 0; text-align: center; color: #555;">
+        &copy; 2025 WebCrest. Elevating Digital Aesthetics.
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+    </script>
+</body>
+</html>

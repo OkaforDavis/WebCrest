@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Solutions Hub | BST Developments</title>
+    <meta name="description" content="Case study for Business Solutions Hub, a comprehensive enterprise platform built by WebCrest.">
+    <meta name="theme-color" content="#0066cc">
+    <link rel="icon" href="/WebCrest/logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Classic Template Overrides for specific Premium Vibe */
+        :root {
+            --classic-primary: #0a192f;
+            --classic-accent: #d4af37; /* Metallic Gold */
+            --classic-text: #333333;
+            --classic-bg: #fdfdfd;
+        }
+        
+        .classic-hero {
+            background: linear-gradient(135deg, var(--classic-primary) 0%, #172a45 100%);
+            padding: 8rem 2rem 6rem;
+            position: relative;
+            color: #ffffff;
+            overflow: hidden;
+            border-bottom: 4px solid var(--classic-accent);
+        }
+        
+        .classic-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+        }
+
+        .classic-badge {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: var(--classic-accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--classic-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .client-logo {
+            width: 140px;
+            height: 140px;
+            border-radius: 12px;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            object-fit: contain;
+            border: 2px solid var(--classic-accent);
+        }
+
+        .classic-hero-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .classic-hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .classic-hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .project-details {
+            background-color: var(--classic-bg);
+            padding: 5rem 0;
+            color: var(--classic-text);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .dark-theme .project-details {
+            background: var(--background-section);
+            color: var(--text-color-secondary);
+        }
+
+        .detail-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .detail-card h3 {
+            color: var(--classic-accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: rgba(10, 25, 47, 0.1);
+            color: var(--classic-primary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(10, 25, 47, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dark-theme .tech-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-tag:hover {
+            background: var(--classic-accent);
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--classic-accent);
+        }
+
+        .feature-block {
+            margin-bottom: 3rem;
+        }
+
+        .feature-block h2 {
+            font-family: 'Georgia', serif;
+            color: var(--classic-primary);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-theme .feature-block h2 {
+            color: white;
+        }
+
+        .feature-block p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+            border-left: 4px solid var(--classic-accent);
+            border-radius: 0 12px 12px 0;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, transparent 100%);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--classic-accent);
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Large Image Showcase */
+        .showcase-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: var(--shadow-deep);
+            margin: 4rem 0;
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-image:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 900px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            .classic-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (Standard WebCrest) -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo-brand">
+                <img src="/WebCrest/logo.png" alt="WebCrest Logo" class="logo" loading="lazy">
+            </a>
+            <ul class="nav-list" id="nav-links-desktop">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                <li><a href="index.html#contact-section" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle (Standard) -->
+    <div class="theme-toggle-container" id="theme-toggle-container">
+        <button class="theme-menu-toggle" id="theme-menu-toggle" aria-label="Toggle Theme Menu">
+            <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-menu-content" id="theme-menu-content">
+            <h3>Customize Theme</h3>
+            <div class="theme-divider"></div>
+            <div class="theme-section">
+                <div class="theme-options" id="theme-options">
+                    <button class="theme-btn" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+                    <button class="theme-btn" data-theme="light"><i class="fas fa-sun"></i> Light</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Case Study Hero -->
+    <header class="classic-hero">
+        <div class="classic-hero-container" data-aos="fade-up">
+            <img src="project_assets/logo_business_1776184797367.png" alt="Apex Solutions Logo" class="client-logo">
+            <br>
+            <span class="classic-badge">Enterprise Platform</span>
+            <h1>Business Solutions Hub</h1>
+            <p>We architected a comprehensive enterprise toolkit for Apex Solutions, integrating core CRM capabilities with a streamlined, lightning-fast client portal.</p>
+            <a href="#case-study" class="btn btn-primary" style="background: var(--classic-accent); color: var(--classic-primary); border: none;">Explore Case Study <i class="fas fa-arrow-down"></i></a>
+        </div>
+    </header>
+
+    <!-- Case Study Details -->
+    <section id="case-study" class="project-details">
+        <div class="details-grid">
+            <!-- Left Column: Story -->
+            <div class="story-column">
+                <div class="feature-block" data-aos="fade-right">
+                    <h2>The Challenge</h2>
+                    <p>Apex Solutions was utilizing highly fragmented systems for tracking leads, managing client communications, and processing secure transactions. This created massive bottlenecks for their sales team and confused their end-users. They needed a single, unified "Hub" that maintained a highly professional and classical corporate elegance while functioning at modern web speeds.</p>
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Dashboard Preview" class="showcase-image" data-aos="zoom-in">
+
+                <div class="feature-block" data-aos="fade-right">
+                    <h2>The Solution</h2>
+                    <p>WebCrest designed an integrated SaaS dashboard tailored to B2B enterprise users. We focused on a 'Classic Professional' aesthetic—utilizing structured data tables, deep navy branding, and gold accents to establish trust and reliability.</p>
+                    <p>Under the hood, we implemented a robust backend capable of handling high-volume concurrent data requests, along with a secure, real-time client-facing portal where end-users can manage their portfolios effortlessly without placing calls to support agents.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-value">300%</div>
+                        <div class="stat-label">Faster Load Times</div>
+                    </div>
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-value">45%</div>
+                        <div class="stat-label">Increase in Conversion</div>
+                    </div>
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-value">-60%</div>
+                        <div class="stat-label">Support Tickets</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Meta Info -->
+            <div class="meta-column" data-aos="fade-left">
+                <div class="detail-card" style="margin-bottom: 2rem;">
+                    <h3>Project Details</h3>
+                    <ul style="list-style:none; padding:0; margin:0; line-height: 2.5;">
+                        <li><strong>Client:</strong> Apex Solutions Inc.</li>
+                        <li><strong>Industry:</strong> B2B Software / Enterprise</li>
+                        <li><strong>Timeline:</strong> 12 Weeks</li>
+                        <li><strong>Services:</strong> UI/UX Design, Full-Stack Dev, Security Audit</li>
+                        <li><strong>Status:</strong> <span style="color:var(--classic-accent); font-weight:bold;">Deployed</span></li>
+                    </ul>
+                </div>
+
+                <div class="detail-card">
+                    <h3>Technologies Used</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Figma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple CTA -->
+    <section class="dark-section" style="padding: 6rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+        <h2 style="font-family: 'Georgia', serif; font-size: 2.5rem; color: #fff; margin-bottom: 1.5rem;">Need an Enterprise Solution?</h2>
+        <p style="color: #bbb; max-width: 600px; margin: 0 auto 2.5rem; font-size: 1.1rem;">Let's discuss how we can build a highly structured, scalable web platform for your business.</p>
+        <a href="index.html#contact-section" class="btn btn-primary" style="background: var(--classic-accent); border:none; padding: 1rem 2.5rem; font-size: 1.1rem;">Get in Touch</a>
+    </section>
+
+    <footer>
+        <div class="container text-center" style="padding: 2rem 0; color: #666;">
+            &copy; 2025 WebCrest. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true, easing: 'ease-out-cubic' });
+    </script>
+</body>
+</html>
