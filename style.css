@@ -1243,7 +1243,6 @@ body {
 }
 .nav-link.active {
   color: var(--text-color-link);
-  border-bottom: 3px solid var(--text-color-link);
   background-color: rgba(0, 136, 255, 0.15);
 }
 
