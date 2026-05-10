@@ -177,7 +177,7 @@ body {
   background: var(--background-main);
   color: var(--text-color-main);
   line-height: 1.7;
-  overflow-x: hidden;
+  overflow-x: clip !important;
   font-size: 16px;
   font-weight: 400;
 }
@@ -194,7 +194,6 @@ body {
   padding: 0 2rem;
   box-sizing: border-box;
   width: 100%;
-  overflow-x: hidden;
 }
 
 section {
@@ -1058,7 +1057,7 @@ body {
   background: var(--background-main);
   color: var(--text-color-main);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip !important;
 }
 
 .dark-section {
@@ -1682,6 +1681,15 @@ footer .footer-links a:hover {
 }
 
 @media (max-width: 480px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* --- FIX AOS DOUBLE SCROLLBAR BUG --- */
+body[data-aos-easing] {
+  overflow-x: clip !important;
+}
   section {
     padding: 2.5rem 0;
   }

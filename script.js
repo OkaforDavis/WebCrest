@@ -463,17 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
     once: true,
   });
 
-  // Smooth Scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-
   // Contact Form Submission with EmailJS
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
