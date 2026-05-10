@@ -169,10 +169,13 @@
 /* --- GENERAL STYLES --- */
 html {
   scroll-behavior: smooth;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 body {
-  margin: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   background: var(--background-main);
   color: var(--text-color-main);
@@ -515,7 +518,9 @@ section {
   box-shadow: 0 4px 20px var(--shadow-color);
   position: sticky;
   top: 0 !important;
-  margin-top: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+  left: 0;
   z-index: 1000;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -1056,7 +1061,8 @@ footer .footer-links a:hover::before {
 
 /* --- GENERAL STYLES (now using variables) --- */
 body {
-  margin: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   background: var(--background-main);
   color: var(--text-color-main);
