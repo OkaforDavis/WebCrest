@@ -386,9 +386,9 @@ section {
 
 .theme-menu-content {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
+  top: 0;
+  left: 0;
+  transform: scale(0.9);
   width: 90%;
   max-width: 320px;
   background: var(--card-bg);
@@ -400,7 +400,7 @@ section {
   -webkit-backdrop-filter: blur(15px);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s var(--transition-smooth);
+  transition: opacity 0.3s var(--transition-smooth), visibility 0.3s var(--transition-smooth), transform 0.3s var(--transition-smooth);
   pointer-events: none;
   max-height: 85vh;
   overflow-y: auto;
@@ -410,7 +410,7 @@ section {
 .theme-menu-content.active {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, -50%) scale(1);
+  transform: scale(1);
   pointer-events: auto;
 }
 

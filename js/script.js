@@ -311,11 +311,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const themePopupOverlay = document.getElementById('theme-popup-overlay');
   
   if (themeMenuToggle && themeMenuContent && themePopupOverlay) {
+    // Append to body to avoid clipping issues with positioned ancestors
+    document.body.appendChild(themeMenuContent);
+
+    const updateMenuPosition = () => {
+      if (typeof FloatingUIDOM === 'undefined' || !themeMenuContent.classList.contains('active')) return;
+      
+      const themeToggleContainer = document.getElementById('theme-toggle-container');
+      if (!themeToggleContainer) return;
+
+      FloatingUIDOM.computePosition(themeToggleContainer, themeMenuContent, {
+        placement: 'top',
+        middleware: [
+          FloatingUIDOM.offset(15),
+          FloatingUIDOM.flip({ fallbackPlacements: ['bottom', 'left', 'right'] }),
+          FloatingUIDOM.shift({ padding: 15 })
+        ]
+      }).then(({ x, y }) => {
+        Object.assign(themeMenuContent.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
+      });
+    };
+
+    // Store globally so drag handlers can access it
+    window.updateThemeMenuPosition = updateMenuPosition;
+
     themeMenuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       themeMenuToggle.classList.toggle('active');
       themeMenuContent.classList.toggle('active');
       themePopupOverlay.classList.toggle('active');
+      
+      if (themeMenuContent.classList.contains('active')) {
+        updateMenuPosition();
+      }
     });
 
     // Close theme menu when clicking overlay
@@ -328,12 +359,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close theme menu when clicking outside
     document.addEventListener('click', (e) => {
       const themeContainer = document.getElementById('theme-toggle-container');
-      if (themeContainer && !themeContainer.contains(e.target)) {
+      if (themeContainer && !themeContainer.contains(e.target) && !themeMenuContent.contains(e.target)) {
         themeMenuToggle.classList.remove('active');
         themeMenuContent.classList.remove('active');
         themePopupOverlay.classList.remove('active');
       }
     });
+
+    // Update on resize and scroll
+    window.addEventListener('resize', updateMenuPosition);
+    window.addEventListener('scroll', updateMenuPosition, { passive: true });
   }
 
   // Theme Selection
@@ -427,6 +462,10 @@ document.addEventListener('DOMContentLoaded', () => {
       themeToggleContainer.style.bottom = 'auto';
       themeToggleContainer.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
       themeToggleContainer.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+
+      if (window.updateThemeMenuPosition) {
+        window.updateThemeMenuPosition();
+      }
     });
 
     document.addEventListener('touchmove', (e) => {
@@ -444,6 +483,10 @@ document.addEventListener('DOMContentLoaded', () => {
       themeToggleContainer.style.bottom = 'auto';
       themeToggleContainer.style.left = Math.max(0, Math.min(newX, maxX)) + 'px';
       themeToggleContainer.style.top = Math.max(0, Math.min(newY, maxY)) + 'px';
+
+      if (window.updateThemeMenuPosition) {
+        window.updateThemeMenuPosition();
+      }
     }, { passive: true });
 
     document.addEventListener('mouseup', () => {
