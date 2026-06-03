@@ -572,8 +572,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const payButton = document.getElementById('pay-button');
       const amount = payButton?.dataset?.amount ? parseInt(payButton.dataset.amount) : 5000;
 
-      // Flutterwave Integration
-      if (typeof FlutterwaveCheckout === 'undefined') {
+      // Paystack Integration
+      if (typeof PaystackPop === 'undefined') {
         Swal.fire({
           title: 'Payment Unavailable',
           text: 'Payment processing unavailable. Your request has been recorded!',
@@ -584,25 +584,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-446d40f2470f5e98aaf9d54508372101-X",
-        tx_ref: `BSTDEV-${Date.now()}`,
-        amount: amount,
+      let handler = PaystackPop.setup({
+        key: 'pk_live_e2ebd7a376bd6f1e106400bba86935f9e6df381d',
+        email: email,
+        amount: amount * 100, // Paystack amount is in kobo
         currency: "NGN",
-        country: "NG",
-        payment_options: "card,mobilemoney,ussd",
-        customer: {
-          email: email,
-          phone_number: "080XXXXXXX",
-          name: name,
+        ref: `BSTDEV-${Date.now()}`,
+        metadata: {
+          custom_fields: [
+            {
+              display_name: "Name",
+              variable_name: "name",
+              value: name
+            },
+            {
+              display_name: "Service",
+              variable_name: "service",
+              value: service
+            }
+          ]
         },
-        customizations: {
-          title: "BST Developments Quote Request",
-          description: `Quote request for ${service}`,
-          logo: "https://your-domain.com/logo.png",
-        },
-        callback: function(data) {
-          console.log('Transaction successful:', data);
+        callback: function(response) {
+          console.log('Transaction successful:', response);
           Swal.fire({
             title: 'Success!',
             html: `Thank you for your request, ${name}! We will be in touch shortly.`,
@@ -617,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           form.reset();
         },
-        onclose: function() {
+        onClose: function() {
           Swal.fire({
             title: 'Cancelled',
             text: 'You cancelled the payment process.',
@@ -632,6 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       });
+      handler.openIframe();
     });
   }
 });

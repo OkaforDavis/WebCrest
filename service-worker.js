@@ -14,7 +14,7 @@ const STATIC_ASSETS = [
   'https://unpkg.com/aos@2.3.1/dist/aos.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
   'https://cdn.jsdelivr.net/npm/sweetalert2@11',
-  'https://checkout.flutterwave.com/v3.js',
+  'https://js.paystack.co/v1/inline.js',
   'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js'
 ];
 

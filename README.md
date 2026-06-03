@@ -48,7 +48,7 @@ WebCrest is a modern, fully responsive website for a digital solutions and web d
 - Backdrop blur effects for modern aesthetics
 
 ### 💳 **Payment Integration**
-- Flutterwave payment gateway integration
+- Paystack payment gateway integration
 - Dynamic pricing calculator
 - Quote request payment processing
 - Secure transaction handling
@@ -61,7 +61,7 @@ WebCrest is a modern, fully responsive website for a digital solutions and web d
   - AOS (Animate On Scroll) for entrance animations
   - Font Awesome for icons
   - SweetAlert2 for notifications
-  - Flutterwave for payments
+  - Paystack for payments
 
 ## 📁 Project Structure
 
@@ -192,7 +192,7 @@ Update the contact details in `index.html`:
 
 ## 🔐 Security
 
-- Payment processing via trusted Flutterwave gateway
+- Payment processing via trusted Paystack gateway
 - No sensitive data stored locally except theme preferences
 - HTTPS recommended for production deployment
 
@@ -226,7 +226,7 @@ Update the contact details in `index.html`:
 - Use relative paths for local images
 
 ### Payment not working?
-- Verify Flutterwave credentials
+- Verify Paystack credentials
 - Check internet connection
 - Ensure popup blockers are disabled
 - Check browser console for API errors
@@ -296,7 +296,7 @@ Company logo image
 - **AOS Library**: Animate On Scroll
 - **Font Awesome**: Icon library
 - **SweetAlert2**: Beautiful alerts
-- **Flutterwave**: Payment processing
+- **Paystack**: Payment processing
 
 ## 🔄 Version History
 

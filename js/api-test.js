@@ -8,11 +8,11 @@
 const API_CONFIG = {
   TEST_MODE: true,
   
-  // Flutterwave Test Keys
-  FLUTTERWAVE: {
-    publicKey: "FLWPUBK_TEST-0000000000000000000000000000000000000000",
-    secretKey: "FLWSECK_TEST-0000000000000000000000000000000000000000",
-    baseUrl: "https://api.flutterwave.com/v3"
+  // Paystack Test Keys
+  PAYSTACK: {
+    publicKey: "pk_test_0000000000000000000000000000000000000000",
+    secretKey: "sk_test_0000000000000000000000000000000000000000",
+    baseUrl: "https://api.paystack.co"
   },
 
   // Test Data
@@ -274,10 +274,10 @@ function runAllTests() {
 
 // Test URLs for reference
 const TEST_URLS = {
-  flutterwaveCheckout: "https://checkout.flutterwave.com/v3/hosted/",
-  flutterwaveAPI: "https://api.flutterwave.com/v3",
+  paystackInline: "https://js.paystack.co/v1/inline.js",
+  paystackAPI: "https://api.paystack.co",
   webhookTest: "http://localhost:3000/api/payment/webhook",
-  paymentStatus: "https://api.flutterwave.com/v3/transactions/{id}/verify"
+  paymentStatus: "https://api.paystack.co/transaction/verify/{id}"
 };
 
 // ============================================
@@ -304,7 +304,7 @@ const TEST_URLS = {
    - Or include as a script tag in your HTML for development
 
 4. API Endpoints:
-   - See TEST_URLS object for Flutterwave endpoints
+   - See TEST_URLS object for Paystack endpoints
    - Replace placeholders with actual transaction IDs when testing
 
 */
