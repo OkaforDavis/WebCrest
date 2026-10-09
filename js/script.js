@@ -47,6 +47,10 @@ if ('serviceWorker' in navigator) {
 })();
 
 // ============ CURRENCY CONVERSION SYSTEM ============
+// Currency the Paystack account settles in. The current account is Nigerian (NGN);
+// switch to 'GHS' (with the Paystack Ghana key) once WebCrest's Ghana account is live.
+const PAYSTACK_CURRENCY = 'NGN';
+
 const CurrencySystem = {
   baseCurrency: 'GHS', // Ghana Cedis is now base currency
   basePrice: 1, // 1 GHS = base conversion unit
@@ -182,6 +186,19 @@ const CurrencySystem = {
       console.warn('Exchange rate fetch failed:', err);
       this.exchangeRate = 1;
     }
+  },
+
+  // Rate from the base currency (GHS) to any currency, e.g. the currency Paystack charges in
+  async getRateTo(currency) {
+    if (currency === this.baseCurrency) return 1;
+    if (currency === this.userCurrency && this.exchangeRate !== 1) return this.exchangeRate;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${this.baseCurrency}`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    const rate = (await response.json()).rates?.[currency];
+    if (!rate) throw new Error(`No exchange rate for ${currency}`);
+    return rate;
   },
 
   // Convert price from base currency (GHS) to user currency
@@ -563,33 +580,59 @@ document.addEventListener('DOMContentLoaded', () => {
   // Quote Form Submission
   const quoteForm = document.getElementById('quote-form');
   if (quoteForm) {
-    quoteForm.addEventListener('submit', function(e) {
+    quoteForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       const form = e.target;
-      const name = form.querySelector('#name')?.value || 'Customer';
-      const email = form.querySelector('#email')?.value || 'noemail@example.com';
+      const name = form.querySelector('#quote-name').value.trim();
+      const email = form.querySelector('#quote-email').value.trim();
       const service = form.querySelector('#service')?.value || 'custom';
       const payButton = document.getElementById('pay-button');
-      const amount = payButton?.dataset?.amount ? parseInt(payButton.dataset.amount) : 5000;
+      const amountInBase = parseInt(payButton?.dataset?.amount) || 0;
+
+      if (!amountInBase) {
+        Swal.fire({ title: 'Calculate first', text: 'Please calculate your price before paying.', icon: 'info', confirmButtonText: 'OK' });
+        return;
+      }
 
       // Paystack Integration
       if (typeof PaystackPop === 'undefined') {
         Swal.fire({
           title: 'Payment Unavailable',
-          text: 'Payment processing unavailable. Your request has been recorded!',
+          text: 'Payment processing is unavailable right now. Please contact us to complete your order.',
           icon: 'info',
           confirmButtonText: 'OK'
         });
-        form.reset();
         return;
+      }
+
+      // Quote prices are in GHS; the Paystack account charges in PAYSTACK_CURRENCY
+      let chargeAmount;
+      try {
+        chargeAmount = Math.round(amountInBase * await CurrencySystem.getRateTo(PAYSTACK_CURRENCY));
+      } catch (err) {
+        console.warn('Charge rate lookup failed:', err);
+        Swal.fire({ title: 'Payment Unavailable', text: 'We could not get the current exchange rate. Please try again in a moment.', icon: 'error', confirmButtonText: 'OK' });
+        return;
+      }
+
+      const chargeLabel = `${CurrencySystem.currencySymbols[PAYSTACK_CURRENCY] || PAYSTACK_CURRENCY}${chargeAmount.toLocaleString()}`;
+      if (PAYSTACK_CURRENCY !== CurrencySystem.userCurrency) {
+        const confirm = await Swal.fire({
+          title: 'Confirm payment',
+          text: `Your card or account will be charged ${chargeLabel} (${PAYSTACK_CURRENCY}), equal to ${CurrencySystem.formatPrice(amountInBase)} at today's rate.`,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: `Pay ${chargeLabel}`
+        });
+        if (!confirm.isConfirmed) return;
       }
 
       let handler = PaystackPop.setup({
         key: 'pk_live_e2ebd7a376bd6f1e106400bba86935f9e6df381d',
         email: email,
-        amount: amount * 100, // Paystack amount is in kobo
-        currency: "NGN",
-        ref: `BSTDEV-${Date.now()}`,
+        amount: chargeAmount * 100, // Paystack amounts are in the smallest unit (kobo / pesewas)
+        currency: PAYSTACK_CURRENCY,
+        ref: `WCT-${Date.now()}`,
         metadata: {
           custom_fields: [
             {
