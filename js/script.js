@@ -373,13 +373,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Append to body to avoid clipping issues with positioned ancestors
     document.body.appendChild(themeMenuContent);
 
+    // The menu is position: fixed, so it is placed in viewport coordinates
+    // (strategy 'fixed'); otherwise it lands off-screen once the page is scrolled.
     const updateMenuPosition = () => {
-      if (typeof FloatingUIDOM === 'undefined' || !themeMenuContent.classList.contains('active')) return;
-      
+      if (!themeMenuContent.classList.contains('active')) return;
+
       const themeToggleContainer = document.getElementById('theme-toggle-container');
       if (!themeToggleContainer) return;
 
+      if (typeof FloatingUIDOM === 'undefined') {
+        // Fallback: just above the button, kept inside the screen.
+        const b = themeToggleContainer.getBoundingClientRect();
+        const m = themeMenuContent.getBoundingClientRect();
+        const left = Math.min(Math.max(15, b.right - m.width), window.innerWidth - m.width - 15);
+        const top = b.top - m.height - 15 >= 15 ? b.top - m.height - 15 : Math.min(b.bottom + 15, window.innerHeight - m.height - 15);
+        Object.assign(themeMenuContent.style, { left: `${left}px`, top: `${Math.max(15, top)}px` });
+        return;
+      }
+
       FloatingUIDOM.computePosition(themeToggleContainer, themeMenuContent, {
+        strategy: 'fixed',
         placement: 'top',
         middleware: [
           FloatingUIDOM.offset(15),
