@@ -1,15 +1,15 @@
-const CACHE_NAME = 'webcrest-v9';
+const CACHE_NAME = 'webcrest-v10';
 const STATIC_ASSETS = [
-  '/WebCrest/',
-  '/WebCrest/index.html',
-  '/WebCrest/about.html',
-  '/WebCrest/projects.html',
-  '/WebCrest/style.css',
-  '/WebCrest/script.js',
-  '/WebCrest/manifest.json',
-  '/WebCrest/logo.png',
-  '/WebCrest/icon-192.png',
-  '/WebCrest/icon-512.png',
+  '/',
+  '/index.html',
+  '/about.html',
+  '/projects.html',
+  '/css/style.css',
+  '/js/script.js',
+  '/manifest.json',
+  '/assets/images/logo.png',
+  '/assets/images/icon-192.png',
+  '/assets/images/icon-512.png',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
@@ -28,16 +28,16 @@ self.addEventListener('install', event => {
         console.warn('Some assets failed to cache:', err);
         // Cache what we can, don't fail on CDN assets
         return cache.addAll([
-          '/WebCrest/',
-          '/WebCrest/index.html',
-          '/WebCrest/about.html',
-          '/WebCrest/projects.html',
-          '/WebCrest/style.css',
-          '/WebCrest/script.js',
-          '/WebCrest/manifest.json',
-          '/WebCrest/logo.png',
-          '/WebCrest/icon-192.png',
-          '/WebCrest/icon-512.png'
+          '/',
+          '/index.html',
+          '/about.html',
+          '/projects.html',
+          '/css/style.css',
+          '/js/script.js',
+          '/manifest.json',
+          '/assets/images/logo.png',
+          '/assets/images/icon-192.png',
+          '/assets/images/icon-512.png'
         ]);
       });
     })
@@ -93,7 +93,7 @@ self.addEventListener('fetch', event => {
         .catch(() => {
           // Offline: return cached version
           return caches.match(request).then(cachedResponse => {
-            return cachedResponse || caches.match('/WebCrest/index.html');
+            return cachedResponse || caches.match('/index.html');
           });
         })
     );

@@ -11,7 +11,7 @@ if (typeof emailjs !== 'undefined') {
 // Register Service Worker for offline support and installation
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/WebCrest/service-worker.js', { scope: '/WebCrest/' })
+    navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
       .then(registration => {
         console.log('✓ Service Worker registered successfully:', registration);
         
