@@ -38,6 +38,48 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// ============ INSTALL BUTTON ============
+// Android/desktop: show "Install app" when the browser allows it.
+// iPhone: Safari has no install prompt, so show a one-time "Add to Home Screen" tip.
+(function setupInstall() {
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (standalone) return;
+  const seen = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+  const remember = (k) => { try { localStorage.setItem(k, '1'); } catch { /* private mode */ } };
+
+  function pill(html, onClick) {
+    const el = document.createElement('div');
+    el.className = 'install-pill';
+    el.innerHTML = html + '<button class="install-close" aria-label="Dismiss">&times;</button>';
+    el.querySelector('.install-close').onclick = (e) => { e.stopPropagation(); remember('installDismissed'); el.remove(); };
+    if (onClick) el.querySelector('.install-action').onclick = onClick;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('show'));
+    return el;
+  }
+
+  let deferred = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferred = e;
+    if (seen('installDismissed')) return;
+    const el = pill('<img src="/assets/images/icon-192.png" alt="" width="28" height="28"><button class="install-action">Install WebCrest app</button>', async () => {
+      el.remove();
+      deferred.prompt();
+      await deferred.userChoice;
+      deferred = null;
+    });
+  });
+  window.addEventListener('appinstalled', () => document.querySelector('.install-pill')?.remove());
+
+  const iOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (iOS && !seen('installDismissed')) {
+    window.addEventListener('load', () => setTimeout(() => pill(
+      '<img src="/assets/images/apple-touch-icon.png" alt="" width="28" height="28"><span class="install-action">Install: tap <b>Share</b> then <b>Add to Home Screen</b></span>'
+    ), 4000));
+  }
+})();
+
 // Initialize theme immediately to prevent flash of unstyled content
 (function initThemeImmediately() {
   const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -517,10 +559,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // AOS Initialization
+  // AOS Initialization: short, smooth reveals; off for people who turn motion off.
   AOS.init({
-    duration: 1000,
+    duration: 650,
+    easing: 'ease-out-cubic',
+    offset: 40,
     once: true,
+    disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   });
 
   // Contact Form Submission with EmailJS

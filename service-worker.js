@@ -1,4 +1,4 @@
-const CACHE_NAME = 'webcrest-v10';
+const CACHE_NAME = 'webcrest-v11';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -7,7 +7,9 @@ const STATIC_ASSETS = [
   '/css/style.css',
   '/js/script.js',
   '/manifest.json',
-  '/assets/images/logo.png',
+  '/assets/images/logo-nav.png',
+  '/assets/images/apple-touch-icon.png',
+  '/assets/images/icon-maskable-192.png',
   '/assets/images/icon-192.png',
   '/assets/images/icon-512.png',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
@@ -35,7 +37,9 @@ self.addEventListener('install', event => {
           '/css/style.css',
           '/js/script.js',
           '/manifest.json',
-          '/assets/images/logo.png',
+          '/assets/images/logo-nav.png',
+  '/assets/images/apple-touch-icon.png',
+  '/assets/images/icon-maskable-192.png',
           '/assets/images/icon-192.png',
           '/assets/images/icon-512.png'
         ]);

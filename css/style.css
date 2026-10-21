@@ -2378,3 +2378,85 @@ img {
 .venture-card .btn {
   margin-top: 1rem;
 }
+
+/* ============ SMOOTH SCROLLING & LIGHTER EFFECTS ON PHONES ============ */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: none), (max-width: 768px) {
+  /* Large blurs are redrawn on every scroll frame on phones; a light blur looks the same and scrolls smoothly */
+  .navbar,
+  .modern-theme .navbar,
+  .theme-menu-content,
+  .modern-theme .theme-menu-content,
+  .modern-theme .form-container,
+  .modern-theme .theme-options,
+  .modern-theme .color-picker-container {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  footer i.fa-heart,
+  .fa-heart {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============ INSTALL BUTTON ============ */
+.install-pill {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 32px);
+  padding: 8px 8px 8px 12px;
+  border-radius: 999px;
+  background: #0b1220;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, 140%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-size: 14px;
+}
+.install-pill.show { transform: translate(-50%, 0); }
+.install-pill img { border-radius: 8px; background: #fff; flex: none; }
+.install-pill .install-action {
+  background: none;
+  border: 0;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+.install-pill .install-close {
+  background: rgba(255, 255, 255, 0.12);
+  border: 0;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  flex: none;
+}
